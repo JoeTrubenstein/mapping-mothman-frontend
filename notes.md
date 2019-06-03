@@ -41,3 +41,9 @@ On September 11, 2001 in New York City, a large, winged creature was reportedly 
 #### Minneapolis
 
 an eight-lane steel bridge on I-35W collapsed during evening rush hour. Thirteen people were killed and nearly 150 injured. After the collapse, George Noory received multiple calls on his radio program Coast to Coast AM from people reporting Mothman sightings.
+
+### Multiple Unnamed Witnesses
+#### 2009
+#### Chihuahua, Mexico
+
+a Swine Flu (H1N1) pandemic started in rural Mexico near Chihuahua and spread throughout the world with more than 14,000 deaths confirmed worldwide. Investigators traced the pandemic's origins to the month of April, just a month after more than 30 sightings of Mothman in and around Chihuahua.
