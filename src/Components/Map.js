@@ -31,10 +31,8 @@ class Map extends Component {
     }
 
     handleMarkerClick(marker) {
-        console.log(marker)
-        // if (this.props.markerClicked !== null) {
-        //     this.props.markerClicked(marker, this.state.map);
-        // }
+        // console.log(marker) 
+        this.props.searchMarkerClicked(marker)
     }
 
     render() {
