@@ -9,6 +9,7 @@ export default class Sighting extends Component {
                 <h4>{sighting.label}</h4>
                 <img src={sighting.image} />
                 <p>{sighting.desc}</p>
+
             </div>
         )
     }

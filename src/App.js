@@ -4,6 +4,9 @@ import './App.css';
 import Search from './Components/Search';
 import Nav from './Components/Nav'
 import Sighting from './Components/Sighting'
+import Form from './Components/Form'
+import Location from './Components/Location'
+import axios from 'axios';
 
 class App extends Component {
 
@@ -20,24 +23,57 @@ class App extends Component {
     // console.log(this.state.marker)
   }
 
+  submitSighting = (sighting) => {
+    console.log(sighting);
+    let newObj = {
+      witness: sighting.name,
+      seenDate: sighting.date,
+      location: sighting.location,
+      description: sighting.desc
+    }
+    console.log(newObj);
+
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Access-Control-Allow-Origin': "*"
+      }
+  }
+    axios.post('http://localhost:3030/users/new-sighting', newObj, axiosConfig)
+          .then( response => {
+            console.log(response);
+          })
+          .catch( error => {
+            console.log(error);
+          })
+  }
+
   render() {
 
   return (
     <div>
       <Nav />
-    
-    <div className="row">
-      <div className="col-md-6">
-        <Search appMarkerClicked={this.markerClicked}
-                randomString={'random string'}
-                />
+      
+      <div className="row">
+        <div className="col-md-6">
+          <Search appMarkerClicked={this.markerClicked}
+                  randomString={'random string'}
+                  />
+        </div>
+        <div className="col-md-6">
+          <Sighting stuff={'ummmmm'}
+                    marker={this.state.marker}
+          />
+        </div>
+        
       </div>
-      <div className="col-md-6">
-        <Sighting stuff={'ummmmm'}
-                  marker={this.state.marker}
-        />
+
+      <div>
+        <Form appSubmitSighting={this.submitSighting} />        
       </div>
-    </div>
+
+
+  
     </div>
   );
   }
