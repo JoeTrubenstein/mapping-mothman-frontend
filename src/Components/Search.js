@@ -16,6 +16,15 @@ class Search extends Component {
             {id: '4', price: 250, name:'Some shit', position:{lat:40.72325119, lng:-73.9907821}, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpB4a009tbOBYT6ELsoZPF5fdM-CW0MeydSlqRcomXMR7hotaG', seller: {username: 'Who?', image: 'https://pbs.twimg.com/profile_images/3082075108/916250160b6303ad041f619708607a6c_400x400.jpeg'}, description: 'Some stuff about the sighting'}
         ]
     }
+    
+
+    componentWillMount() {
+        //console.log(this.props.sightings)
+    }
+
+    componentDidUpdate(prevProps) {
+      
+    }
 
     centerChanged = (center) => {
         
@@ -30,9 +39,11 @@ class Search extends Component {
         this.props.appMarkerClicked(marker)
     }
 
-    render() {
+    
 
-        let items = this.state.data;
+    render() {
+        //console.log(this.props.sightings)
+        let items = this.props.sightings;
         let markers = [];
 
         items.forEach( item => {
