@@ -12,7 +12,8 @@ class App extends Component {
 
   state = {
     marker: {},
-    sightings: []
+    sightings: [],
+    jwt: ''
   }
 
   componentDidMount() {
@@ -82,7 +83,8 @@ class App extends Component {
     let axiosConfig = {
       headers: {
           'Content-Type': 'application/json;charset=UTF-8',
-          'Access-Control-Allow-Origin': "*"
+          'Access-Control-Allow-Origin': "*",
+          'Authorization' : this.state.jwt
       }
   }
     axios.post('https://mothman-server.herokuapp.com/users/new-sighting', newObj, axiosConfig)
