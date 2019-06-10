@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import Location from './Location'
+// import cloudinary from 'cloudinary';
 
 export default class Form extends Component {
 
-    state = {}
+    state = {
+        uploadedImg: ''
+    }
 
 
     setLocation = (formLoc) => {
+        if (!formLoc) {
+            return;
+        }
         this.setState({
             location: formLoc.location
         })
@@ -27,6 +33,26 @@ export default class Form extends Component {
         
 
         // this.props.appSubmitSighting(this.state)
+    }
+
+    uploadWidget = (event) => {
+        event.preventDefault();
+
+        window.cloudinary.openUploadWidget({ cloud_name: 'dhj95a6jv', upload_preset: 'ml_default', tags: ['mothman'] }, (error, result) => {
+            if (error) {
+              console.log(error)
+            } else {
+              if (result.event === 'success') {
+                console.log(result.info.secure_url)
+                let imgUrl = result.info.secure_url;
+                this.setState({
+                    uploadedImg: imgUrl
+                }, () => {
+                    console.log(this.state)
+                })
+              } 
+            }
+          })
     }
 
     render() {
@@ -67,8 +93,7 @@ export default class Form extends Component {
                             </div>
                             <div className="form-group">
                                 <div className="custom-file">
-                                    <input type="file" className="custom-file-input" id="photo" />
-                                    <label className="custom-file-label" htmlFor="customFile">Upload Photo (if available)</label>
+                                    <button onClick={this.uploadWidget}>Upload photo</button>
                                 </div>
 
                             </div>

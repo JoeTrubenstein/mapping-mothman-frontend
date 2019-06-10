@@ -28,7 +28,7 @@ export default class Location extends Component {
         <Geosuggest
           ref={el=>this._geoSuggest=el}
           placeholder="Type your location"
-          initialValue="Manhattan, NY"
+          initialValue=""
           fixtures={fixtures}
           onSuggestSelect={this.onSuggestSelect}
           location={new google.maps.LatLng(53.558572, 9.9278215)}

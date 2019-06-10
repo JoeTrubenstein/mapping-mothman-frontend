@@ -64,12 +64,13 @@ class App extends Component {
   }
 
   submitSighting = (sighting) => {
-    //console.log(sighting);
+    // console.log(sighting);
     let newObj = {
       witness: sighting.name,
       seenDate: sighting.date,
       location: sighting.location,
-      description: sighting.desc
+      description: sighting.desc,
+      imageUrl: sighting.uploadedImg
     }
     //console.log(newObj);
 

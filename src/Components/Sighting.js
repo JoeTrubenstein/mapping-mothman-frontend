@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 export default class Sighting extends Component {
     render() {
         let sighting = this.props.marker
+        // console.log(sighting)
         return (
             <div>
                 <h2>Insert information about a sighting here:</h2>
