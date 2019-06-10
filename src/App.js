@@ -20,11 +20,12 @@ class App extends Component {
   }
 
   getSightings = () => {
-    axios.get('http://localhost:3030/users/get-sightings')
+    axios.get('http://mothman-server.herokuapp.com/users/get-sightings')
           .then( res => {
+            console.log(res)
             let items = res.data;
             let sights = [];
-            // console.log(items)
+            console.log(items)
 
             items.forEach( item => {
 
@@ -93,17 +94,17 @@ class App extends Component {
     
 
   return (
-    <div>
+    <div style={{backgroundColor: 'black', color: 'white'}}>
       <Nav />
       
-      <div className="row">
+      <div className="row" style={{backgroundColor: 'black', color: 'white'}}>
         <div className="col-md-6">
           <Search appMarkerClicked={this.markerClicked}
                   randomString={'random string'}
                   sightings={this.state.sightings}
                   />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6" style={{backgroundColor: 'black', color: 'white'}}>
           <Sighting stuff={'ummmmm'}
                     marker={this.state.marker}
           />
@@ -111,7 +112,7 @@ class App extends Component {
         
       </div>
 
-      <div>
+      <div style={{backgroundColor: 'black', color: 'white'}}>
         <Form appSubmitSighting={this.submitSighting} />        
       </div>
 
