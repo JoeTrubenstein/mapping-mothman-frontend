@@ -1,20 +1,41 @@
 import React from "react";
 import axios from "axios";
 class AdminDash extends React.Component {
-  
   state = {
     marker: {},
     sightings: [],
-    jwt: ""
+    jwt: "token goes here"
   };
 
   componentWillMount() {
-    this.getSightings();
+    this.getSightings()
   }
 
-  getSightings = () => {
+  login = () => {
+    let config = {
+      email: "mothman",
+      password: "mothman"
+    };
     axios
-      .get("https://mothman-server.herokuapp.com/users/get-sightings")
+      .post("https://mothman-server.herokuapp.com/users/signin", config)
+
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  getSightings = () => {
+    let config = {
+      headers: {
+        Authorization: this.state.jwt
+      }
+    };
+
+    axios
+      .get("https://mothman-server.herokuapp.com/users/get-sightings", config)
       .then(res => {
         let items = res.data;
 
@@ -48,14 +69,37 @@ class AdminDash extends React.Component {
 
   showSighting = () => {
     return this.state.sightings.map(sightings => {
-      return <div key={sightings.id}>
-      <h3>{sightings.name}</h3>
-      <h5>{sightings.position.lat}</h5>
-      <h5>{sightings.position.lng}</h5>
-      <h5>{sightings.description}</h5>
-      <h5>{String(sightings.isApproved)}</h5>
-      <br></br>
-      </div>;
+      return (
+        <div key={sightings.id}>
+          <div className="row">
+            <div className="col-sm">
+              <div className="card" style={{ width: "18rem" }}>
+                <img
+                  src="https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png"
+                  className="card-img-top"
+                  alt="mothman sighting"
+                  style={{ maxHeight: 200 }}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{sightings.name}</h5>
+                  <p className="card-text">{sightings.description}</p>
+                  <h5>{sightings.position.lat}</h5>
+                  <h5>{sightings.position.lng}</h5>
+                  <h5>{String(sightings.isApproved)}</h5>
+                  <a
+                    href="/users/admin-dashboard/<%= sightings[i].id %>"
+                    className="btn btn-primary"
+                  >
+                    Review
+                  </a>
+                </div>
+              </div>
+              <br />
+            </div>
+          </div>
+          <br />
+        </div>
+      );
     });
   };
 
@@ -63,7 +107,14 @@ class AdminDash extends React.Component {
     return (
       <div>
         <h1>Admin Dashboard</h1>
-        {this.showSighting()}
+        <form>
+          <input></input>
+        </form>
+        <div className="container-fluid">
+          <div className="card-deck mb-3 text-center">
+            {this.showSighting()}
+          </div>
+        </div>
       </div>
     );
   }
