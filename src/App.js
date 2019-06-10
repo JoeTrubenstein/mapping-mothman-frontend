@@ -20,14 +20,18 @@ class App extends Component {
   }
 
   getSightings = () => {
-    axios.get('http://mothman-server.herokuapp.com/users/get-sightings')
+    axios.get('https://mothman-server.herokuapp.com/users/get-sightings')
           .then( res => {
-            console.log(res)
             let items = res.data;
-            let sights = [];
-            console.log(items)
+            console.log(items);
 
-            items.forEach( item => {
+            let approvedSights = items.filter(item => item.isApproved === true)
+
+            console.log(approvedSights);
+
+            let sights = [];
+
+            approvedSights.forEach( item => {
 
                 const sight = {
                     id: item._id, 
@@ -81,7 +85,7 @@ class App extends Component {
           'Access-Control-Allow-Origin': "*"
       }
   }
-    axios.post('http://localhost:3030/users/new-sighting', newObj, axiosConfig)
+    axios.post('https://mothman-server.herokuapp.com/users/new-sighting', newObj, axiosConfig)
           .then( response => {
             console.log(response);
           })

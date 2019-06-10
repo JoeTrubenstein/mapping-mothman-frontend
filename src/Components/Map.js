@@ -58,7 +58,7 @@ class Map extends Component {
                                     key={index}
                                     clickable={true}
                                     icon={marker.icon}
-                                    label={marker.label}
+                                    label={marker.icon}
                                     onClick={this.handleMarkerClick.bind(this, marker)}
                                     {...marker}
                                 />
