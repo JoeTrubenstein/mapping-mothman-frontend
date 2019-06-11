@@ -45,9 +45,9 @@
   border: 2px solid transparent;
   border-radius: 5px;
   box-shadow: 0 0 1px #3d464d;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   -webkit-transition: border 0.2s, box-shadow 0.2s;
-          transition: border 0.2s, box-shadow 0.2s;
+  transition: border 0.2s, box-shadow 0.2s;
 }
 .geosuggest__input:focus {
   border-color: #3d93d4;
@@ -69,7 +69,7 @@
   list-style: none;
   z-index: 5;
   -webkit-transition: max-height 0.2s, border 0.2s;
-          transition: max-height 0.2s, border 0.2s;
+  transition: max-height 0.2s, border 0.2s;
 }
 .geosuggest__suggests--hidden {
   max-height: 0;
@@ -83,7 +83,7 @@
 .geosuggest__item {
   font-size: 18px;
   font-size: 1rem;
-  padding: .5em .65em;
+  padding: 0.5em 0.65em;
   cursor: pointer;
 }
 .geosuggest__item:hover,
@@ -110,4 +110,17 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+/* Admin Panel */
+
+
+.masthead {
+  margin-top: 100px;
+}
+
+.card-deck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
