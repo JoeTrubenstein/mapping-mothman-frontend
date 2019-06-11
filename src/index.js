@@ -4,12 +4,14 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import AdminDash from './Components/AdminDash'
+import LayoutDemo1 from './Components/layoutDemo1'
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
     <Router>
       <div>
         <Route exact path="/" component={App} />
+        <Route path="/layout-demo-one" component={LayoutDemo1} />
         <Route path="/admin-dash" component={AdminDash} />
       </div>
     </Router>
