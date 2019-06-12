@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-// import logo from "../logo.svg";
+import NavBar from "../Components/NavBar"
 import "../App.css";
-import Search from "./Search";
-// import Nav from "../Components/Nav";
-// import Sighting from "./Sighting";
-import Form from "./Form";
-// import Location from "../Components/Location";
+
 import axios from "axios";
 
 class LayoutDemo1 extends Component {
@@ -144,44 +140,7 @@ class LayoutDemo1 extends Component {
         }}
       >
         {/* nav */}
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-          <div className="container">
-            <a className="navbar-brand" href="../">
-              Moth Maps
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarResponsive"
-              aria-controls="navbarResponsive"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-        
-                <li className="nav-item">
-                  <a className="nav-link" href="../about">
-                    About
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="../sighting-dash">
-                    Sightings
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="../contact">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+        <NavBar />
 
         <header className="masthead">
           <div className="container h-100">
