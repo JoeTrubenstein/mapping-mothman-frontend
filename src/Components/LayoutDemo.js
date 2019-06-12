@@ -141,7 +141,7 @@ class LayoutDemo1 extends Component {
         }}
       >
         <Helmet>
-          <title>Moth Maps, Mapping The Mothman</title>
+          <title>Mapping The Mothman</title>
           <meta
             name="description"
             content="Sightings of a mysterious being known as 'The Mothman' have been reported worldwide. The Moth Maps Project is the latest in tracking its alleged whereabouts."
@@ -157,7 +157,8 @@ class LayoutDemo1 extends Component {
                 <h1
                   style={{
                     color: `whitesmoke`,
-                    fontSize: `3.5rem`
+                    fontSize: `3.5rem`,
+                    // fontFamily: `butcherman`
                   }}
                   className="font-weight-light"
                 >
