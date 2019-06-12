@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 // import logo from "../logo.svg";
 import "../App.css";
-import Search from "../Components/Search";
+import Search from "./Search";
 // import Nav from "../Components/Nav";
 // import Sighting from "./Sighting";
-import Form from "../Components/Form";
+import Form from "./Form";
 // import Location from "../Components/Location";
 import axios from "axios";
 
