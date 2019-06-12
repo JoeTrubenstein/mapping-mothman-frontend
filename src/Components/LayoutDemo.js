@@ -79,7 +79,7 @@ class LayoutDemo1 extends Component {
                   src={sightings.image}
                   className="card-img-top"
                   alt="mothman sighting"
-                  style={{ maxHeight: `200px` }}
+                  style={{ height: `200px` }}
                 />
                 <div className="card-body">
                   <h5 className="card-title">{sightings.name}</h5>
@@ -158,13 +158,9 @@ class LayoutDemo1 extends Component {
                   style={{
                     color: `whitesmoke`,
                     fontSize: `3.5rem`,
-<<<<<<< HEAD
-                    // fontFamily: `butcherman`
-=======
 
                     // fontFamily: `butcherman`
 
->>>>>>> 1e40adc90ce5c488e02156dc76065a660a5969f8
                   }}
                   className="font-weight-light"
                 >
