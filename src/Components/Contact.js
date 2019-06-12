@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "../App.css";
-import NavBar from "../Components/NavBar"
+import NavBar from "../Components/NavBar";
 
 import axios from "axios";
 
@@ -142,9 +142,13 @@ class About extends Component {
         }}
         id="aboutBackground"
       >
-        <NavBar/>
+        <NavBar />
 
-        <div className="container">
+        <div 
+        style={{
+          minHeight: `100vh`
+        }}
+        className="container">
           <div className="card border-0 shadow my-5">
             <div className="card-body p-5">
               <section className="mb-4">
@@ -152,99 +156,66 @@ class About extends Component {
                   Contact us
                 </h2>
                 <p className="text-center w-responsive mx-auto mb-5">
-                  Do you have any questions? Please do not hesitate to contact
-                  us directly. Our team will come back to you within a matter of
-                  hours to help you.
+                  Have a question or comment? Send us a message and a team
+                  member will get back to you asap.
                 </p>
                 <div className="row">
                   <div className="col-md-9 mb-md-0 mb-5">
-                    <form
-                      id="contact-form"
-                      name="contact-form"
-                      action="mail.php"
-                      method="POST"
-                    >
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="md-form mb-0">
-                            <input
-                              type="text"
-                              id="name"
-                              name="name"
-                              className="form-control"
-                            />
-                            <label htmlFor="name" className="">
-                              Your name
-                            </label>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="md-form mb-0">
-                            <input
-                              type="text"
-                              id="email"
-                              name="email"
-                              className="form-control"
-                            />
-                            <label htmlFor="email" >
-                              Your email
-                            </label>
-                          </div>
-                        </div>
+                    <form name="contact" method="POST" data-netlify="true">
+                      <div className="form-group">
+                        <label htmlFor="exampleFormControlInput1">
+                          Email address
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="exampleFormControlInput1"
+                          placeholder="name@example.com"
+                        />
                       </div>
-                      <div className="row">
-                        <div className="col-md-12">
-                          <div className="md-form mb-0">
-                            <input
-                              type="text"
-                              id="subject"
-                              name="subject"
-                              className="form-control"
-                            />
-                            <label htmlFor="subject">
-                              Subject
-                            </label>
-                          </div>
-                        </div>
+                      <div className="form-group" />
+                      <div className="form-group" />
+                      <div className="form-group">
+                        <label htmlFor="exampleFormControlTextarea1">
+                          Message
+                        </label>
+                        <textarea
+                          className="form-control"
+                          id="exampleFormControlTextarea1"
+                          rows={3}
+                          defaultValue={""}
+                        />
                       </div>
-                      <div className="row">
-                        <div className="col-md-12">
-                          <div className="md-form">
-                            <textarea
-                              type="text"
-                              id="message"
-                              name="message"
-                              rows={2}
-                              className="form-control md-textarea"
-                              defaultValue={""}
-                            />
-                            <label htmlFor="message">Your message</label>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                    <div className="text-center text-md-left">
                       <button
-                        className="btn btn-primary"
-                        
-                        > Send
+                        ref={el => {
+                          if (el) {
+                            el.style.setProperty(
+                              "background-color",
+                              `#202020`,
+                              "important"
+                            );
+                          }
+                        }}
+                        type="submit"
+                        class="btn btn-secondary btn-lg"
+                      >
+                        Submit
                       </button>
-                    </div>
-                    <div className="status" />
+                    </form>
                   </div>
                   <div className="col-md-3 text-center">
                     <ul className="list-unstyled mb-0">
                       <li>
                         <i className="fas fa-map-marker-alt fa-2x" />
-                        <p>San Francisco, CA 94126, USA</p>
+                        <p>New York, New York, USA</p>
                       </li>
                       <li>
                         <i className="fas fa-phone mt-4 fa-2x" />
-                        <p>+ 01 234 567 89</p>
+                        <p>xxx-xxx-xxxx</p>
                       </li>
                       <li>
                         <i className="fas fa-envelope mt-4 fa-2x" />
-                        <p>contact@mdbootstrap.com</p>
+                        <p>mothmanmaps@gmail.com</p>
                       </li>
                     </ul>
                   </div>
