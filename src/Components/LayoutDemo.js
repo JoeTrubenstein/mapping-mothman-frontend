@@ -149,7 +149,8 @@ class LayoutDemo1 extends Component {
                 <h1
                   style={{
                     color: `whitesmoke`,
-                    fontSize: `3.5rem`
+                    fontSize: `3.5rem`,
+                    fontFamily: 'Butcherman'
                   }}
                   className="font-weight-light"
                 >

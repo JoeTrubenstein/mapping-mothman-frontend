@@ -161,6 +161,15 @@ class About extends Component {
         </div>
 
         <Form appSubmitSighting={this.submitSighting} />
+
+        {this.state.markerClicked ?
+          <div style={{textAlign: 'center', color: 'white'}}>
+            <h2>Insert information about a sighting here:</h2>
+            <h4>{this.state.marker.label}</h4>
+            <img src={this.state.marker.image}  style={{width: '200px'}}/>
+            <p>{this.state.marker.desc}</p>
+          </div>
+        : null}
         
         <footer id="sticky-footer" className="py-4 bg-dark text-white-50">
           <div className="container text-center">

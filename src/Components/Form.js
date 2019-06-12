@@ -88,15 +88,20 @@ export default class Form extends Component {
 
         return (
             <React.Fragment>
+                <div ref={(el) => {
+                    if (el) {
+                        el.style.setProperty('width', '100%', 'important');
+                        el.style.setProperty('text-align', 'center', 'important');
+                    }
+                    }}>
                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" ref={(el) => {
                     if (el) {
                         el.style.setProperty('background-color', 'darkgrey', 'important');
-                        el.style.setProperty('display', 'flex', 'important');
-                        el.style.setProperty('justify-content', 'center', 'important');
                     }
                     }}>
                     Report a sighting
                 </button>
+                </div>
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                     <div className="modal-content">
