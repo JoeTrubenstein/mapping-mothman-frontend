@@ -6,14 +6,15 @@ import AdminDash from './Components/AdminDash'
 import LayoutDemo from './Components/LayoutDemo'
 import About from './Components/About'
 import SightingDash from './Components/SightingDash'
+import Login from './Components/Login'
 import Contact from './Components/Contact'
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
     <Router>
       <div>
-        
         <Route exact path="/" component={LayoutDemo} />
+        <Route path="/login" component={Login} />
         <Route path="/about" component={About} />
         <Route path="/sighting-dash" component={SightingDash} />
         <Route path="/contact" component={Contact} />
