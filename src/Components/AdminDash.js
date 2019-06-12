@@ -90,7 +90,7 @@ class AdminDash extends React.Component {
 
     axios
       .post(
-        "https://mothman-server.herokuapp.com/users/admin-dashboard/reject-sighting",
+        "localhost:3030/users/admin-dashboard/reject-sighting",
         config
       )
       .then(() => {
@@ -108,7 +108,7 @@ class AdminDash extends React.Component {
 
     axios
       .post(
-        "https://mothman-server.herokuapp.com/users/admin-dashboard/approve-sighting",
+        "localhost:3030/users/admin-dashboard/approve-sighting",
         config
       )
       .then(() => {
