@@ -37,6 +37,13 @@ export default class Form extends Component {
             this.props.appSubmitSighting(this.state)
         })
 
+        setTimeout(() => {
+            this.setState({
+                formSubmit: false
+            })
+        },
+        5000)
+
 
         
 
@@ -71,8 +78,6 @@ export default class Form extends Component {
                     uploadedImg: imgUrl,
                     imgName: imgName,
                     photoSubmit: true
-                }, () => {
-                    console.log(this.state)
                 })
               } 
             }

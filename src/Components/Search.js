@@ -45,7 +45,7 @@ class Search extends Component {
 
             const marker = {
                 key: item.id, 
-                label: item.name, 
+                // label: item.name, 
                 position: item.position,
                 defaultAnimation: 2,
                 image: item.image,

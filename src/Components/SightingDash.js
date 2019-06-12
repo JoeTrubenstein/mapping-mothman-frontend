@@ -45,7 +45,7 @@ class About extends Component {
         approvedSights.slice(-6).forEach(item => {
           const sight = {
             id: item._id,
-            name: item.witness,
+            // name: item.witness,
             position: item.location,
             image: item.imageUrl,
             description: item.description,
