@@ -56,8 +56,7 @@ class AdminDash extends React.Component {
     };
 
     axios
-      // .post("https://mothman-server.herokuapp.com/users/signin", config)
-      .post("https://mothman-server.herokuapp.com/users/signin", config)
+      .post("https://mothman-server.herokuapp.com/users/admin-signin", config)
       .then(res => {
         const { token } = res.data;
         localStorage.setItem("jwtToken", token);
