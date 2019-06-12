@@ -358,6 +358,7 @@ class AdminDash extends React.Component {
                 boxShadow: `0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)`
               }}
               src="https://res.cloudinary.com/indridcold/image/upload/v1560271049/kpdncj0s7qryjchvmv6q.jpg"
+              alt="man in graveyard with large moth"
             />
             <br />
             <br />

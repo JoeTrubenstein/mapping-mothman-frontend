@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-
 import "../App.css";
-import Search from "../Components/Search";
-import NavBar from "../Components/NavBar";
-
+import NavBar from "./NavBar";
 import axios from "axios";
 
 class About extends Component {
@@ -143,15 +140,33 @@ class About extends Component {
         }}
         id="aboutBackground"
       >
-       <NavBar />
+        {/* nav */}
+        <NavBar />
 
         <div className="container">
           <div className="card border-0 shadow my-5">
             <div className="card-body p-5">
-            <Search appMarkerClicked={this.markerClicked}
-                  randomString={'random string'}
-                  sightings={this.state.sightings}
-                  />
+              <h1 className="font-weight-light">
+                <small>Why Map The Mothman?</small>
+              </h1>
+              <img
+                alt="undraw night time flat design art guy camping"
+                width="100%"
+                src="https://res.cloudinary.com/indridcold/image/upload/v1560288566/xxcxtvyzjowwjeobjo5h.png"
+              />
+              <p className="lead">
+                While a generous amount of Mothman information already exists on
+                the web, there lacks a centralized database of Mothman
+                sightings. The Moth Maps project aims to collect and curate
+                Mothman reports from all around the world.
+              </p>
+              <p className="lead"> Using the latest in
+                mapping technology, the Moth Maps project provides a simple way to submit and track information pertaining to one's encounter with The Mothman.
+                </p>
+              <p className="lead">Anyone is free to report and Mothman sighting, and is encouraged to do so. After review and approval by an administrator of the 
+              Moth Man project, your story will become available for the rest of the web to see.</p>
+              <div style={{ height: 200 }} />
+              <p className="lead mb-0">The Moth Maps Project Team</p>
             </div>
           </div>
         </div>
