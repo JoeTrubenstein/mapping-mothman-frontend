@@ -152,6 +152,7 @@ class About extends Component {
           <div className="card border-0 shadow my-5">
             <div className="card-body p-5">
               <section className="mb-4">
+                <div style={{height:50}}></div>
                 <h2 className="h1-responsive font-weight-bold text-center my-4">
                   Contact us
                 </h2>

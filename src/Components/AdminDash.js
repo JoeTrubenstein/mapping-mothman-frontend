@@ -280,10 +280,12 @@ class AdminDash extends React.Component {
     const { isAuth } = this.state;
     return (
       <div>
-
         <Helmet>
           <title>The Mothman Administrator Dashboard</title>
-          <meta name="description" content="The Admin Panel for Moth Maps. Mothman sightings are sent here for review." />
+          <meta
+            name="description"
+            content="The Admin Panel for Moth Maps. Mothman sightings are sent here for review."
+          />
         </Helmet>
 
         <NavBar />
@@ -399,6 +401,15 @@ class AdminDash extends React.Component {
                   </label> */}
                 </div>
                 <button
+                  ref={el => {
+                    if (el) {
+                      el.style.setProperty(
+                        "background-color",
+                        `#202020`,
+                        "important"
+                      );
+                    }
+                  }}
                   className="btn btn-lg btn-primary btn-block"
                   onClick={this.login}
                 >
