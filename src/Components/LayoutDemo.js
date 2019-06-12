@@ -13,7 +13,7 @@ class LayoutDemo1 extends Component {
     marker: {},
     sightings: [],
     jwt: ""
-  };
+  }
 
   componentDidMount() {
     //console.log('component did mount', 19)
