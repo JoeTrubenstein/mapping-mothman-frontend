@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import setAuthJWT from "../utils/setAuthJWT";
 import NavBar from "../Components/NavBar";
 import { handleJWTExpirationApi } from "../utils/api";
+import { Helmet } from "react-helmet";
 
 class AdminDash extends React.Component {
   // declare starting state
@@ -279,6 +280,12 @@ class AdminDash extends React.Component {
     const { isAuth } = this.state;
     return (
       <div>
+        
+        <Helmet>
+          <title>The Mothman Administrator Dashboard</title>
+          <meta name="description" content="The Admin Panel for Moth Maps. Mothman sightings are sent here for review." />
+        </Helmet>
+
         <NavBar />
 
         <input
@@ -296,7 +303,6 @@ class AdminDash extends React.Component {
             <div className="row h-100 align-items-center">
               <div className="col-12 text-center">
                 <div style={{ height: 50 }} />
-             
               </div>
             </div>
           </div>
@@ -333,23 +339,22 @@ class AdminDash extends React.Component {
         ) : (
           // if not -> show this
           <div className="col-12 text-center">
-
             {/* Get a better form */}
 
             <div className="card-deck mb-3 text-center">
               <form className="form-signin" data-op-form-id={1}>
-              <a
-              title="Tim Bertelink [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons"
-              href="https://commons.wikimedia.org/wiki/File:Mothman_Artist%27s_Impression.png"
-            >
-              <img
-                width={150}
-                height={150}
-                alt="Mothman Artist's Impression"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Mothman_Artist%27s_Impression.png/512px-Mothman_Artist%27s_Impression.png"
-              />
-            </a>
-            <div style={{height:40}}></div>
+                <a
+                  title="Tim Bertelink [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons"
+                  href="https://commons.wikimedia.org/wiki/File:Mothman_Artist%27s_Impression.png"
+                >
+                  <img
+                    width={150}
+                    height={150}
+                    alt="Mothman Artist's Impression"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Mothman_Artist%27s_Impression.png/512px-Mothman_Artist%27s_Impression.png"
+                  />
+                </a>
+                <div style={{ height: 40 }} />
                 <label htmlFor="inputEmail" className="sr-only">
                   Email address
                 </label>
@@ -366,26 +371,26 @@ class AdminDash extends React.Component {
                   }}
                 />
                 <input
-                 className="form-control mr-sm-2"
-                 type="text"
-                 name="email"
-                 placeholder="email"
-                 aria-label="userName"
-                 // run the value functions so these fields can be saved in the state, then used in the POST request
-                 onChange={this.loginValues}
-                 value={this.state.decoded.username}
+                  className="form-control mr-sm-2"
+                  type="text"
+                  name="email"
+                  placeholder="email"
+                  aria-label="userName"
+                  // run the value functions so these fields can be saved in the state, then used in the POST request
+                  onChange={this.loginValues}
+                  value={this.state.decoded.username}
                 />
                 <label htmlFor="inputPassword" className="sr-only">
                   Password
                 </label>
                 <input
-                   className="form-control mr-sm-2"
-                   type="password"
-                   name="pw"
-                   placeholder="Password"
-                   aria-label="Password"
-                   onChange={this.loginValues}
-                   value={this.state.password}
+                  className="form-control mr-sm-2"
+                  type="password"
+                  name="pw"
+                  placeholder="Password"
+                  aria-label="Password"
+                  onChange={this.loginValues}
+                  value={this.state.password}
                 />
                 <div className="checkbox mb-3">
                   {/* <label>
@@ -399,7 +404,9 @@ class AdminDash extends React.Component {
                 >
                   Sign in
                 </button>
-                <p className="mt-5 mb-3 text-muted">©2019 The Moth Maps Project </p>
+                <p className="mt-5 mb-3 text-muted">
+                  ©2019 The Moth Maps Project{" "}
+                </p>
               </form>
             </div>
           </div>
