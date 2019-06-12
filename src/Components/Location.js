@@ -24,7 +24,7 @@ export default class Location extends Component {
     const google = window.google;
  
     return (
-      <div>
+      <React.Fragment>
         <Geosuggest
           ref={el=>this._geoSuggest=el}
           placeholder="Type your location"
@@ -34,7 +34,7 @@ export default class Location extends Component {
           location={new google.maps.LatLng(53.558572, 9.9278215)}
           radius="20" />
  
-      </div>
+      </React.Fragment>
     )
   }
  

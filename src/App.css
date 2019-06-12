@@ -54,6 +54,7 @@
   box-shadow: 0 0 0 transparent;
 }
 .geosuggest__suggests {
+  color: black;
   position: absolute;
   top: 100%;
   left: 0;
