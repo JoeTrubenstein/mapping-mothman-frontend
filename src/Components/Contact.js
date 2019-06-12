@@ -173,7 +173,7 @@ class About extends Component {
                               name="name"
                               className="form-control"
                             />
-                            <label htmlFor="name" className>
+                            <label htmlFor="name" className="">
                               Your name
                             </label>
                           </div>
@@ -186,7 +186,7 @@ class About extends Component {
                               name="email"
                               className="form-control"
                             />
-                            <label htmlFor="email" className>
+                            <label htmlFor="email" >
                               Your email
                             </label>
                           </div>
@@ -201,7 +201,7 @@ class About extends Component {
                               name="subject"
                               className="form-control"
                             />
-                            <label htmlFor="subject" className>
+                            <label htmlFor="subject">
                               Subject
                             </label>
                           </div>
@@ -226,7 +226,7 @@ class About extends Component {
                     <div className="text-center text-md-left">
                       <button
                         className="btn btn-primary"
-                        onclick="document.getElementById('contact-form').submit();"
+                        
                         > Send
                       </button>
                     </div>

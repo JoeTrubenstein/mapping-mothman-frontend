@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthJWT from "../utils/setAuthJWT";
+import NavBar from "../Components/NavBar";
+import { handleJWTExpirationApi } from "../utils/api";
 
 class AdminDash extends React.Component {
   // declare starting state
@@ -15,6 +17,20 @@ class AdminDash extends React.Component {
 
   componentWillMount() {
     this.getSightings();
+    handleJWTExpirationApi()
+      .then(token => {
+        let decoded = jwt_decode(token);
+        this.setState({
+          decoded: decoded,
+          isAuth: true
+        });
+      })
+      .catch(error => {
+        this.setState({
+          message: error,
+          isAuth: false
+        });
+      });
   }
 
   // populate the state with the input values on change
@@ -71,12 +87,17 @@ class AdminDash extends React.Component {
       id: sightingID
     };
 
-    axios.post(
-      "https://mothman-server.herokuapp.com/users/admin-dashboard/reject-sighting",
-      config
-    );
-
-    this.getSightings();
+    axios
+      .post(
+        "https://mothman-server.herokuapp.com/users/admin-dashboard/reject-sighting",
+        config
+      )
+      .then(() => {
+        this.getSightings();
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   approveSighting = sightingID => {
@@ -84,12 +105,17 @@ class AdminDash extends React.Component {
       id: sightingID
     };
 
-    axios.post(
-      "https://mothman-server.herokuapp.com/users/admin-dashboard/approve-sighting",
-      config
-    );
-
-    this.getSightings();
+    axios
+      .post(
+        "https://mothman-server.herokuapp.com/users/admin-dashboard/approve-sighting",
+        config
+      )
+      .then(() => {
+        this.getSightings();
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   // set up a fallback image in case no one submits one
@@ -253,75 +279,24 @@ class AdminDash extends React.Component {
     const { isAuth } = this.state;
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-          <div className="container">
-            <a className="navbar-brand" href="../">
-              Mapping Mothman
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarResponsive"
-              aria-controls="navbarResponsive"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <input
-                    className="form-control mr-sm-2"
-                    type="text"
-                    name="email"
-                    placeholder="email"
-                    aria-label="userName"
-                    // run the value functions so these fields can be saved in the state, then used in the POST request
-                    onChange={this.loginValues}
-                    value={this.state.username}
-                  />
-                </li>
-                <li className="nav-item">
-                  <input
-                    className="form-control mr-sm-2"
-                    type="password"
-                    name="pw"
-                    placeholder="Password"
-                    aria-label="Password"
-                    onChange={this.loginValues}
-                    value={this.state.password}
-                  />
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="btn btn-outline-success my-2 my-sm-0"
-                    onClick={this.login}
-                  >
-                    Login
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="btn btn-outline-success my-2 my-sm-0"
-                    onClick={this.logout}
-                  >
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+        <NavBar />
+
+        <input
+          className="form-control mr-sm-2"
+          type="password"
+          name="pw"
+          placeholder="Password"
+          aria-label="Password"
+          onChange={this.loginValues}
+          value={this.state.password}
+        />
+
         <header>
           <div className="container h-100">
             <div className="row h-100 align-items-center">
               <div className="col-12 text-center">
-                <h1 className="font-weight-light">
-                  Mapping Mothman Admin Dashboard
-                </h1>
-                <p className="lead">Approve or Reject Pending Sightings</p>
+                <div style={{ height: 50 }} />
+             
               </div>
             </div>
           </div>
@@ -334,6 +309,12 @@ class AdminDash extends React.Component {
           <div className="row h-100 align-items-center">
             <div className="col-12 text-center">
               <h3>Logged in as {this.state.decoded.email}</h3>
+              <button
+                className="btn btn-outline my-2 my-sm-0"
+                onClick={this.logout}
+              >
+                Logout
+              </button>
             </div>
             <div className="col-12 text-center">
               <h3>Approved</h3>
@@ -352,17 +333,75 @@ class AdminDash extends React.Component {
         ) : (
           // if not -> show this
           <div className="col-12 text-center">
-            <img
-              style={{
-                borderRadius: `15px`,
-                boxShadow: `0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)`
-              }}
-              src="https://res.cloudinary.com/indridcold/image/upload/v1560271049/kpdncj0s7qryjchvmv6q.jpg"
-              alt="man in graveyard with large moth"
-            />
-            <br />
-            <br />
-            <h5>Please login to approve sightings</h5>
+
+            {/* Get a better form */}
+
+            <div className="card-deck mb-3 text-center">
+              <form className="form-signin" data-op-form-id={1}>
+              <a
+              title="Tim Bertelink [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons"
+              href="https://commons.wikimedia.org/wiki/File:Mothman_Artist%27s_Impression.png"
+            >
+              <img
+                width={150}
+                height={150}
+                alt="Mothman Artist's Impression"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Mothman_Artist%27s_Impression.png/512px-Mothman_Artist%27s_Impression.png"
+              />
+            </a>
+            <div style={{height:40}}></div>
+                <label htmlFor="inputEmail" className="sr-only">
+                  Email address
+                </label>
+                <com-1password-op-button
+                  id="com-1password-op-button"
+                  data-op-target={0}
+                  data-state="locked"
+                  className="op-large"
+                  style={{
+                    marginLeft: "114px !important",
+                    marginTop: "11px !important",
+                    backgroundImage:
+                      "url(chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/images/icons/app_icon-light_bg-color-locked-16.svg) !important"
+                  }}
+                />
+                <input
+                 className="form-control mr-sm-2"
+                 type="text"
+                 name="email"
+                 placeholder="email"
+                 aria-label="userName"
+                 // run the value functions so these fields can be saved in the state, then used in the POST request
+                 onChange={this.loginValues}
+                 value={this.state.decoded.username}
+                />
+                <label htmlFor="inputPassword" className="sr-only">
+                  Password
+                </label>
+                <input
+                   className="form-control mr-sm-2"
+                   type="password"
+                   name="pw"
+                   placeholder="Password"
+                   aria-label="Password"
+                   onChange={this.loginValues}
+                   value={this.state.password}
+                />
+                <div className="checkbox mb-3">
+                  {/* <label>
+                    <input type="checkbox" defaultValue="remember-me" />{" "}
+                    Remember me
+                  </label> */}
+                </div>
+                <button
+                  className="btn btn-lg btn-primary btn-block"
+                  onClick={this.login}
+                >
+                  Sign in
+                </button>
+                <p className="mt-5 mb-3 text-muted">©2019 The Moth Maps Project </p>
+              </form>
+            </div>
           </div>
         )}
 
