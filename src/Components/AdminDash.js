@@ -75,6 +75,7 @@ class AdminDash extends React.Component {
       "https://mothman-server.herokuapp.com/users/admin-dashboard/reject-sighting",
       config
     );
+
     this.getSightings();
   };
 
@@ -87,6 +88,7 @@ class AdminDash extends React.Component {
       "https://mothman-server.herokuapp.com/users/admin-dashboard/approve-sighting",
       config
     );
+
     this.getSightings();
   };
 
@@ -312,7 +314,7 @@ class AdminDash extends React.Component {
             </div>
           </div>
         </nav>
-        <header className="masthead">
+        <header>
           <div className="container h-100">
             <div className="row h-100 align-items-center">
               <div className="col-12 text-center">

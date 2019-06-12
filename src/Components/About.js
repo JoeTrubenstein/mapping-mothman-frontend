@@ -9,7 +9,7 @@ import Form from "../Components/Form";
 import axios from "axios";
 import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
 
-class LayoutDemo1 extends Component {
+class About extends Component {
   state = {
     marker: {},
     sightings: [],
@@ -24,12 +24,11 @@ class LayoutDemo1 extends Component {
     this.getSightings();
   }
 
-    // set up a fallback image in case no one submits one
-    addDefaultSrc(ev) {
-      ev.target.src =
-        "https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png";
-    }
-  
+  // set up a fallback image in case no one submits one
+  addDefaultSrc(ev) {
+    ev.target.src =
+      "https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png";
+  }
 
   getSightings = () => {
     axios
@@ -89,7 +88,9 @@ class LayoutDemo1 extends Component {
                 />
                 <div className="card-body">
                   <h5 className="card-title">{sightings.name}</h5>
-                  <p className="card-text">{sightings.submitDate.slice(0,-12)}</p>
+                  <p className="card-text">
+                    {sightings.submitDate.slice(0, -12)}
+                  </p>
                 </div>
               </div>
               <br />
@@ -143,6 +144,7 @@ class LayoutDemo1 extends Component {
         style={{
           backgroundColor: `whitesmoke`
         }}
+        id="aboutBackground"
       >
         {/* nav */}
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -163,7 +165,7 @@ class LayoutDemo1 extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
-        
+
                 <li className="nav-item">
                   <a className="nav-link" href="../about">
                     About
@@ -184,87 +186,34 @@ class LayoutDemo1 extends Component {
           </div>
         </nav>
 
-        <header className="masthead">
-          <div className="container h-100">
-            <div className="row h-100 align-items-center">
-              <div className="col-12 text-center">
-                <h1
-                  style={{
-                    color: `whitesmoke`,
-                    fontSize: `3.5rem`
-                  }}
-                  className="font-weight-light"
-                >
-                  Mapping Mothman
-                </h1>
-                <p
-                  style={{
-                    color: `whitesmoke`
-                  }}
-                  className="lead"
-                >
-                  Tracking America's Mysterious Cryptid
-                </p>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <div
-          style={{
-            backgroundColor: `whitesmoke`
-          }}
-          className="container"
-        >
-          <h1 className="my-4">
-            The Moth Maps Project
-            <small> </small>
-          </h1>
-          <div className="row">
-            <div 
-           style={{
-            
-          }}
-            className="col-md-8">
-                 <a
-              title="Tim Bertelink [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons"
-              href="https://commons.wikimedia.org/wiki/File:Mothman_Artist%27s_Impression.png"
-            >
+        <div className="container">
+          <div className="card border-0 shadow my-5">
+            <div className="card-body p-5">
+              <h1 className="font-weight-light">
+                <small>Why Map The Mothman?</small>
+              </h1>
               <img
-                width="70%"
-                alt="Mothman Artist's Impression"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Mothman_Artist%27s_Impression.png/512px-Mothman_Artist%27s_Impression.png"
+                alt="undraw night time flat design art guy camping"
+                width="100%"
+                src="https://res.cloudinary.com/indridcold/image/upload/v1560288566/xxcxtvyzjowwjeobjo5h.png"
               />
-            </a>
-            </div>
-            <div 
-               style={{
-
-              }}
-            className="col-md-4">
-              <h3 className="my-3">Who is The Mothman?</h3>
-              <p>
-                For over five decades, a mysterious winged being known as
-                The Mothman has been sighted all over the world.
-                <br></br><br></br>
-                 Often seen before tragedies,
-                 many wonder if The Mothman is a benevolent entity, attempting to warn us of pending disasters.
+              <p className="lead">
+                While a generous amount of Mothman information already exists on
+                the web, there lacks a centralized database of Mothman
+                sightings. The Moth Maps project aims to collect and curate
+                Mothman reports from all around the world.
               </p>
-
-              <h3 className="my-3">Our Mission</h3>
-              <ul>
-                <li>Collect Mothman Sightings</li>
-                <li>Connect Mothman Enthusiasts</li>
-                <li>Promote Mothman Awareness</li>
-              </ul>
+              <p className="lead"> Using the latest in
+                mapping technology, the Moth Maps project provides a simple way to submit and track information pertaining to one's encounter with The Mothman.
+                </p>
+              <p className="lead">Anyone is free to report and Mothman sighting, and is encouraged to do so. After review and approval by an administrator of the 
+              Moth Man project, your story will become available for the rest of the web to see.</p>
+              <div style={{ height: 200 }} />
+              <p className="lead mb-0">The Moth Maps Project Team</p>
             </div>
-  
-          </div>
-          <h3 className="my-4">Most Recent Sightings</h3>
-          <div className="card-deck mb-3 text-center">
-            {this.showSighting()}
           </div>
         </div>
+
         <footer id="sticky-footer" className="py-4 bg-dark text-white-50">
           <div className="container text-center">
             <small>Copyright ©2019 Moth Maps</small>
@@ -275,4 +224,4 @@ class LayoutDemo1 extends Component {
   }
 }
 
-export default LayoutDemo1;
+export default About;
