@@ -7,7 +7,6 @@ import Search from "../Components/Search";
 import Form from "../Components/Form";
 // import Location from "../Components/Location";
 import axios from "axios";
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
 
 class LayoutDemo1 extends Component {
   state = {

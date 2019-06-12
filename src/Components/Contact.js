@@ -7,7 +7,6 @@ import Sighting from "./Sighting";
 import Form from "../Components/Form";
 // import Location from "../Components/Location";
 import axios from "axios";
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
 
 class About extends Component {
   state = {
