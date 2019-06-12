@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "../App.css";
 import Search from "../Components/Search";
 import NavBar from "../Components/NavBar";
+import Form from "../Components/Form";
 
 import axios from "axios";
 
@@ -10,7 +11,8 @@ class About extends Component {
   state = {
     marker: {},
     sightings: [],
-    jwt: ""
+    jwt: "",
+    markerClicked: false
   };
 
   componentDidMount() {
@@ -43,7 +45,7 @@ class About extends Component {
         approvedSights.slice(-6).forEach(item => {
           const sight = {
             id: item._id,
-            // name: item.witness,
+            name: item.witness,
             position: item.location,
             image: item.imageUrl,
             description: item.description,
@@ -101,8 +103,10 @@ class About extends Component {
 
   markerClicked = marker => {
     this.setState({
-      marker: marker
+      marker: marker,
+      markerClicked: true
     });
+    // console.log(marker);
   };
 
   submitSighting = sighting => {
@@ -156,6 +160,8 @@ class About extends Component {
           </div>
         </div>
 
+        <Form appSubmitSighting={this.submitSighting} />
+        
         <footer id="sticky-footer" className="py-4 bg-dark text-white-50">
           <div className="container text-center">
             <small>Copyright ©2019 Moth Maps</small>

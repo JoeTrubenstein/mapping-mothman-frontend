@@ -88,13 +88,19 @@ export default class Form extends Component {
 
         return (
             <React.Fragment>
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style={{backgroundColor: 'darkgrey', borderColor: 'darkgrey'}}>
+                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" ref={(el) => {
+                    if (el) {
+                        el.style.setProperty('background-color', 'darkgrey', 'important');
+                        el.style.setProperty('display', 'flex', 'important');
+                        el.style.setProperty('justify-content', 'center', 'important');
+                    }
+                    }}>
                     Report a sighting
                 </button>
                 <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                     <div className="modal-content">
-                    {this.state.formSubmit ? <span style={{color: 'black', backgroundColor: 'rgb(255, 0, 0, 0.5)', margin: '15px', padding: '7px', borderRadius: '4px', textAlign: 'center'}}>Your sighting has been received! It is now under investigation.</span> : 'some bullshit'}
+                    {this.state.formSubmit ? <span style={{color: 'black', backgroundColor: 'rgb(200, 200, 200, 0.5)', margin: '15px', padding: '7px', borderRadius: '4px', textAlign: 'center'}}>Your sighting has been received! It is now under investigation.</span> : ''}
                     <form onSubmit={this.submitForm} ref={element => this.form = element}>
                         
                         <div className="modal-body">
@@ -115,13 +121,21 @@ export default class Form extends Component {
                                 <div className="custom-file">
                                     <button onClick={this.uploadWidget}>Upload photo</button>
                                 </div>
-                                {this.state.photoSubmit ? <span style={{backgroundColor: 'rgba(255, 0, 0, 0.5)', padding: '3px', borderRadius: '4px'}}>{this.state.imgName}</span> : null}
+                                {this.state.photoSubmit ? <span style={{backgroundColor: 'rgba(200, 200, 200, 0.5)', padding: '3px', borderRadius: '4px'}}>{this.state.imgName}</span> : null}
 
                             </div>
                         </div>
                         <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.closeForm}>Close</button>
-                        <button className="btn btn-primary">Submit</button>
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.closeForm} ref={(el) => {
+                        if (el) {
+                            el.style.setProperty('background-color', 'darkgrey', 'important');
+                        }
+                        }}> Close</button>
+                        <button className="btn btn-primary" ref={(el) => {
+                        if (el) {
+                            el.style.setProperty('background-color', 'black', 'important');
+                        }
+                        }}>Submit</button>
                         </div>
                         </form>
 

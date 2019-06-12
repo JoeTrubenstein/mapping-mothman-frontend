@@ -30,14 +30,14 @@ class Search extends Component {
     }
 
     searchMarkerClicked = (marker) => {
-        console.log('we made it to search')
+        console.log(marker)
         this.props.appMarkerClicked(marker)
     }
 
     
 
     render() {
-        //console.log(this.props.sightings)
+        console.log(this.props.sightings)
         let items = this.props.sightings;
         let markers = [];
 
@@ -45,7 +45,7 @@ class Search extends Component {
 
             const marker = {
                 key: item.id, 
-                // label: item.name, 
+                label: item.name, 
                 position: item.position,
                 defaultAnimation: 2,
                 image: item.image,
