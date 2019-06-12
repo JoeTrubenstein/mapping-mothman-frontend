@@ -280,7 +280,7 @@ class AdminDash extends React.Component {
     const { isAuth } = this.state;
     return (
       <div>
-        
+
         <Helmet>
           <title>The Mothman Administrator Dashboard</title>
           <meta name="description" content="The Admin Panel for Moth Maps. Mothman sightings are sent here for review." />
@@ -358,7 +358,7 @@ class AdminDash extends React.Component {
                 <label htmlFor="inputEmail" className="sr-only">
                   Email address
                 </label>
-                <com-1password-op-button
+                {/* <com-1password-op-button
                   id="com-1password-op-button"
                   data-op-target={0}
                   data-state="locked"
@@ -369,7 +369,7 @@ class AdminDash extends React.Component {
                     backgroundImage:
                       "url(chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/images/icons/app_icon-light_bg-color-locked-16.svg) !important"
                   }}
-                />
+                /> */}
                 <input
                   className="form-control mr-sm-2"
                   type="text"
