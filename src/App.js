@@ -78,7 +78,7 @@ class App extends Component {
       description: sighting.desc,
       imageUrl: sighting.uploadedImg
     }
-    //console.log(newObj);
+    console.log(newObj);
 
     let axiosConfig = {
       headers: {

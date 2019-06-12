@@ -158,7 +158,9 @@ class LayoutDemo1 extends Component {
                   style={{
                     color: `whitesmoke`,
                     fontSize: `3.5rem`,
+
                     // fontFamily: `butcherman`
+
                   }}
                   className="font-weight-light"
                 >
