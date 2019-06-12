@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-import NavBar from "../Components/NavBar";
+import NavBar from "./NavBar";
 import axios from "axios";
 
 class About extends Component {
