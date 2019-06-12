@@ -161,7 +161,9 @@ class About extends Component {
                 </p>
                 <div className="row">
                   <div className="col-md-9 mb-md-0 mb-5">
-                    <form name="contact" method="POST" data-netlify="true">
+                    <form 
+                    action="../"
+                    name="contact" method="POST" data-netlify="true">
                       <div className="form-group">
                         <label htmlFor="exampleFormControlInput1">
                           Email address
