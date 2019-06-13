@@ -167,10 +167,7 @@ class About extends Component {
                       action="https://trubenstein.tech/mailman.php"
                       name="contact"
                       method="POST"
-                      
                     >
-                      <input type="hidden" name="bot-field" />
-                      <input type="hidden" name="form-name" value="contact" />
                       <div className="form-group">
                         <label htmlFor="exampleFormControlInput1">
                           Email address
