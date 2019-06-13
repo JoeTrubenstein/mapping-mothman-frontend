@@ -144,15 +144,16 @@ class About extends Component {
       >
         <NavBar />
 
-        <div 
-        style={{
-          minHeight: `100vh`
-        }}
-        className="container">
+        <div
+          style={{
+            minHeight: `100vh`
+          }}
+          className="container"
+        >
           <div className="card border-0 shadow my-5">
             <div className="card-body p-5">
               <section className="mb-4">
-                <div style={{height:30}}></div>
+                <div style={{ height: 30 }} />
                 <h2 className="h1-responsive font-weight-bold text-center my-4">
                   Contact us
                 </h2>
@@ -162,9 +163,14 @@ class About extends Component {
                 </p>
                 <div className="row">
                   <div className="col-md-9 mb-md-0 mb-5">
-                    <form 
-                    netlify
-                    name="contact" method="POST" data-netlify="true">
+                    <form
+                      name="contact"
+                      method="POST"
+                      data-netlify="true"
+                      data-netlify-honeypot="bot-field"
+                    >
+                      <input type="hidden" name="bot-field" />
+                      <input type="hidden" name="form-name" value="contact" />
                       <div className="form-group">
                         <label htmlFor="exampleFormControlInput1">
                           Email address
