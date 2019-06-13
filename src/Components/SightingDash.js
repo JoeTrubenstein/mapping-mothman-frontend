@@ -42,11 +42,11 @@ class About extends Component {
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then(res => {
         let items = res.data;
-        console.log(items);
+        // console.log(items);
 
         let approvedSights = items.filter(item => item.isApproved === true);
 
-        console.log(approvedSights);
+        // console.log(approvedSights);
 
         let sights = [];
 
@@ -123,7 +123,7 @@ class About extends Component {
       markerClicked: true,
       showModal: true
     });
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   submitSighting = sighting => {
