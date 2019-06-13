@@ -69,7 +69,7 @@ class Search extends Component {
 
                     locationChanged={this.centerChanged.bind(this)}
                     markers={markers}
-                    zoom={14}
+                    zoom={13}
                     center={this.state.currentLocation}
                     containerElement={<div style={{ height: 100 + '%'}} /> }
                     mapElement={<div style={{ height: 100 + 'vh'}} /> }

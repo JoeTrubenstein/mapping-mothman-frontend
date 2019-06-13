@@ -105,7 +105,7 @@ class About extends Component {
       marker: marker,
       markerClicked: true
     });
-    // console.log(marker);
+    console.log(marker);
   };
 
   submitSighting = sighting => {
@@ -146,30 +146,46 @@ class About extends Component {
         }}
         id="aboutBackground"
       >
-       <NavBar />
+        <NavBar />
 
         <div className="container">
           <div className="card border-0 shadow my-5">
-            <div className="card-body p-5">
-            <Search appMarkerClicked={this.markerClicked}
-                  randomString={'random string'}
-                  sightings={this.state.sightings}
-                  />
+            <div
+              style={{
+                padding: `5px`
+              }}
+            >
+              <div
+                style={{
+                  height: 10
+                }}
+              />
+              <Search
+                appMarkerClicked={this.markerClicked}
+                randomString={"random string"}
+                sightings={this.state.sightings}
+              />
             </div>
           </div>
         </div>
 
         <Form appSubmitSighting={this.submitSighting} />
 
-        {this.state.markerClicked ?
-          <div style={{textAlign: 'center', color: 'white'}}>
-            <h2>Insert information about a sighting here:</h2>
+        <div style={{ height: 40 }} />
+
+        {this.state.markerClicked ? (
+          <div style={{ textAlign: "center", color: "white" }}>
+            <h2>Sighting Details</h2>
             <h4>{this.state.marker.label}</h4>
-            <img src={this.state.marker.image} alt="an alleged sighting of the mothman" style={{width: '200px'}}/>
+            <img
+              src={this.state.marker.image}
+              alt="an alleged sighting of the mothman"
+              style={{ width: "200px" }}
+            />
             <p>{this.state.marker.desc}</p>
           </div>
-        : null}
-        
+        ) : null}
+
         <footer id="sticky-footer" className="py-4 bg-dark text-white-50">
           <div className="container text-center">
             <small>Copyright ©2019 Moth Maps</small>
