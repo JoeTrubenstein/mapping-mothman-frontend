@@ -171,6 +171,15 @@ export default class Form extends Component {
 
                   <div className="form-group">
                     <textarea
+                      ref={el => {
+                        if (el) {
+                          el.style.setProperty(
+                            "white-space",
+                            "pre-line",
+                            "important"
+                          );
+                        }
+                      }}
                       className="form-control"
                       id="desc"
                       rows={3}
