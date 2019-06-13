@@ -281,7 +281,7 @@ class AdminDash extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>The Mothman Administrator Dashboard</title>
+          <title>Administrator Dash</title>
           <meta
             name="description"
             content="The Admin Panel for Moth Maps. Mothman sightings are sent here for review."

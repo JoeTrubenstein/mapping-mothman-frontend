@@ -26,7 +26,7 @@ class NavBar extends Component {
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <a className="nav-link" href="../admin-dash">
-                    Admins
+                    Admin
                   </a>
                 </li>
                 <li className="nav-item">

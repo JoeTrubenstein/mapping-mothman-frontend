@@ -3,7 +3,9 @@ import "../App.css";
 import Search from "../Components/Search";
 import NavBar from "../Components/NavBar";
 import Form from "../Components/Form";
-import ReactGA from "react-ga"
+import ReactGA from "react-ga";
+import { Helmet } from "react-helmet";
+import { Button, Modal } from "react-bootstrap";
 
 import axios from "axios";
 
@@ -16,9 +18,9 @@ class About extends Component {
   };
 
   initializeReactGA() {
-    ReactGA.initialize('UA-119540107-6');
-    ReactGA.pageview('/sightings-dashboard');
-}
+    ReactGA.initialize("UA-119540107-6");
+    ReactGA.pageview("/sightings-dashboard");
+  }
 
   componentDidMount() {
     //console.log('component did mount', 19)
@@ -107,12 +109,21 @@ class About extends Component {
     });
   };
 
+  close = () => {
+    this.setState({ showModal: false });
+  };
+
+  open = () => {
+    this.setState({ showModal: true });
+  };
+
   markerClicked = marker => {
     this.setState({
       marker: marker,
-      markerClicked: true
+      markerClicked: true,
+      showModal: true
     });
-    console.log(marker);
+    console.log(this.state);
   };
 
   submitSighting = sighting => {
@@ -153,6 +164,13 @@ class About extends Component {
         }}
         id="aboutBackground"
       >
+        <Helmet>
+          <title>Mothman Sightings</title>
+          <meta
+            name="description"
+            content="Sightings of a mysterious being known as 'The Mothman' have been reported worldwide. The Moth Maps Project is the latest in tracking its alleged whereabouts."
+          />
+        </Helmet>
         <NavBar />
 
         <div className="container">
@@ -181,18 +199,38 @@ class About extends Component {
         <div style={{ height: 40 }} />
 
         {this.state.markerClicked ? (
-          <div style={{ textAlign: "center", color: "white" }}>
-            <h2>Sighting Details</h2>
-            <h4>{this.state.marker.label}</h4>
-            <img
-              src={this.state.marker.image}
-              alt="an alleged sighting of the mothman"
-              style={{ width: "200px" }}
-            />
-            <p>{this.state.marker.desc}</p>
+          <div>
+            <Modal show={this.state.showModal} onHide={this.close}>
+              <Modal.Header closeButton>
+                <Modal.Title>{this.state.marker.label}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h4>{this.state.marker.seenDate}</h4>
+                <p>{this.state.marker.desc}</p>
+  
+              </Modal.Body>
+
+              <Modal.Footer>
+                <Button
+                  ref={el => {
+                    if (el) {
+                      el.style.setProperty(
+                        "background-color",
+                        "#202020",
+                        "important"
+                      );
+                    }
+                  }}
+                  onClick={this.close}
+                >
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
         ) : null}
 
+        {/* {this.showSighting()} */}
         <footer id="sticky-footer" className="py-4 bg-dark text-white-50">
           <div className="container text-center">
             <small>Copyright ©2019 Moth Maps</small>

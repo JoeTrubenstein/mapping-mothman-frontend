@@ -49,7 +49,8 @@ class Search extends Component {
                 position: item.position,
                 defaultAnimation: 2,
                 image: item.image,
-                desc: item.description
+                desc: item.description,
+                seenDate: item.seenDate
             }
             markers.push(marker)
         })

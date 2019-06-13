@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Helmet } from "react-helmet";
 import "../App.css";
 import NavBar from "../Components/NavBar";
 
@@ -142,6 +142,13 @@ class About extends Component {
         }}
         id="aboutBackground"
       >
+                <Helmet>
+          <title>Contact Us</title>
+          <meta
+            name="description"
+            content="Sightings of a mysterious being known as 'The Mothman' have been reported worldwide. The Moth Maps Project is the latest in tracking its alleged whereabouts."
+          />
+        </Helmet>
         <NavBar />
 
         <div

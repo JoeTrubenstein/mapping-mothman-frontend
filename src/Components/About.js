@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../App.css";
 import NavBar from "../Components/NavBar";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 class About extends Component {
   state = {
@@ -140,6 +141,13 @@ class About extends Component {
         }}
         id="aboutBackground"
       >
+        <Helmet>
+          <title>About Moth Maps</title>
+          <meta
+            name="description"
+            content="Sightings of a mysterious being known as 'The Mothman' have been reported worldwide. The Moth Maps Project is the latest in tracking its alleged whereabouts."
+          />
+        </Helmet>
         {/* nav */}
         <NavBar />
 
@@ -160,11 +168,18 @@ class About extends Component {
                 sightings. The Moth Maps project aims to collect and curate
                 Mothman reports from all around the world.
               </p>
-              <p className="lead"> Using the latest in
-                mapping technology, the Moth Maps Project provides a simple way to submit and track information pertaining to one's encounter with The Mothman.
-                </p>
-              <p className="lead">Anyone is free to report a Mothman sighting, and is encouraged to do so. After review and approval by an administrator of the 
-              Moth Man project, your story will become available for the rest of the web to see.</p>
+              <p className="lead">
+                {" "}
+                Using the latest in mapping technology, the Moth Maps Project
+                provides a simple way to submit and track information pertaining
+                to one's encounter with The Mothman.
+              </p>
+              <p className="lead">
+                Anyone is free to report a Mothman sighting, and is encouraged
+                to do so. After review and approval by an administrator of the
+                Moth Man project, your story will become available for the rest
+                of the web to see.
+              </p>
               <div style={{ height: 200 }} />
               <p className="lead mb-0">The Moth Maps Project Team</p>
             </div>
