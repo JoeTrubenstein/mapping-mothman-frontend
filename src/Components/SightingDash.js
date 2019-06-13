@@ -16,7 +16,7 @@ class About extends Component {
   };
 
   initializeReactGA() {
-    ReactGA.initialize(process.env.GA_ID);
+    ReactGA.initialize('UA-119540107-6');
     ReactGA.pageview('/sightings-dashboard');
 }
 
