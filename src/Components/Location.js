@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Geosuggest from 'react-geosuggest';
  
 export default class Location extends Component {

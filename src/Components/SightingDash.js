@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import "../App.css";
 import Search from "../Components/Search";
 import NavBar from "../Components/NavBar";
@@ -166,7 +165,7 @@ class About extends Component {
           <div style={{textAlign: 'center', color: 'white'}}>
             <h2>Insert information about a sighting here:</h2>
             <h4>{this.state.marker.label}</h4>
-            <img src={this.state.marker.image}  style={{width: '200px'}}/>
+            <img src={this.state.marker.image} alt="an alleged sighting of the mothman" style={{width: '200px'}}/>
             <p>{this.state.marker.desc}</p>
           </div>
         : null}

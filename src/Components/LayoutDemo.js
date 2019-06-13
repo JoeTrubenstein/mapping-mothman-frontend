@@ -4,7 +4,7 @@ import "../App.css";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 
-class LayoutDemo1 extends Component {
+class LayoutDemo extends Component {
   state = {
     marker: {},
     sightings: [],
@@ -148,7 +148,14 @@ class LayoutDemo1 extends Component {
           />
         </Helmet>
         {/* nav */}
-        <NavBar />
+        <NavBar 
+              appAuthFuncFB={this.handleAuthFB}
+              appAuthFuncEmail={this.handleAuthEmail}
+              appAuthSignup={this.authSignUpEmail}
+              user={this.state.email}
+              errorMessage={this.state.flashMessage}
+              appLogout={this.logout}
+        />
 
         <header className="masthead">
           <div className="container h-100">
@@ -236,4 +243,4 @@ class LayoutDemo1 extends Component {
   }
 }
 
-export default LayoutDemo1;
+export default LayoutDemo;

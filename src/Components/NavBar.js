@@ -5,7 +5,6 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-
         {/* nav */}
         < nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
@@ -49,7 +48,6 @@ class NavBar extends Component {
             </div>
           </div>
         </nav>
-
       </div>
     );
   }
