@@ -14,11 +14,10 @@ class LayoutDemo extends Component {
   };
 
   initializeReactGA() {
-    ReactGA.initialize('UA-119540107-6');
+    ReactGA.initialize(process.env.GA_ID);
     ReactGA.pageview('/homepage');
 }
 
-  // 
 
   componentDidMount() {
     //console.log('component did mount', 19)

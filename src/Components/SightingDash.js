@@ -16,7 +16,7 @@ class About extends Component {
   };
 
   initializeReactGA() {
-    ReactGA.initialize('UA-119540107-6');
+    ReactGA.initialize(process.env.GA_ID);
     ReactGA.pageview('/sightings-dashboard');
 }
 
@@ -26,7 +26,7 @@ class About extends Component {
 
   componentWillMount() {
     this.getSightings();
-    this.initializeReactGA
+    this.initializeReactGA();
   }
 
   // set up a fallback image in case no one submits one
