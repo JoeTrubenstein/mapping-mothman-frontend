@@ -3,6 +3,7 @@ import "../App.css";
 import Search from "../Components/Search";
 import NavBar from "../Components/NavBar";
 import Form from "../Components/Form";
+import ReactGA from "react-ga"
 
 import axios from "axios";
 
@@ -14,12 +15,18 @@ class About extends Component {
     markerClicked: false
   };
 
+  initializeReactGA() {
+    ReactGA.initialize('UA-119540107-6');
+    ReactGA.pageview('/sightings-dashboard');
+}
+
   componentDidMount() {
     //console.log('component did mount', 19)
   }
 
   componentWillMount() {
     this.getSightings();
+    this.initializeReactGA
   }
 
   // set up a fallback image in case no one submits one

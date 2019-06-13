@@ -161,9 +161,9 @@ class About extends Component {
                 Mothman reports from all around the world.
               </p>
               <p className="lead"> Using the latest in
-                mapping technology, the Moth Maps project provides a simple way to submit and track information pertaining to one's encounter with The Mothman.
+                mapping technology, the Moth Maps Project provides a simple way to submit and track information pertaining to one's encounter with The Mothman.
                 </p>
-              <p className="lead">Anyone is free to report and Mothman sighting, and is encouraged to do so. After review and approval by an administrator of the 
+              <p className="lead">Anyone is free to report a Mothman sighting, and is encouraged to do so. After review and approval by an administrator of the 
               Moth Man project, your story will become available for the rest of the web to see.</p>
               <div style={{ height: 200 }} />
               <p className="lead mb-0">The Moth Maps Project Team</p>
