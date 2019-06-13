@@ -164,11 +164,10 @@ class About extends Component {
                 <div className="row">
                   <div className="col-md-9 mb-md-0 mb-5">
                     <form
+                      action="https://trubenstein.tech/mailman.php"
                       name="contact"
                       method="POST"
-                      data-netlify="true"
-                      data-netlify-honeypot="bot-field"
-                      action="/contact"
+                      
                     >
                       <input type="hidden" name="bot-field" />
                       <input type="hidden" name="form-name" value="contact" />
