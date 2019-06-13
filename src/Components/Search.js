@@ -45,7 +45,8 @@ class Search extends Component {
 
             const marker = {
                 key: item.id, 
-                label: item.name, 
+                witness: item.name,
+                //label: item.name, 
                 position: item.position,
                 defaultAnimation: 2,
                 image: item.image,
@@ -70,7 +71,7 @@ class Search extends Component {
 
                     locationChanged={this.centerChanged.bind(this)}
                     markers={markers}
-                    zoom={13}
+                    zoom={5}
                     center={this.state.currentLocation}
                     containerElement={<div style={{ height: 100 + '%'}} /> }
                     mapElement={<div style={{ height: 100 + 'vh'}} /> }

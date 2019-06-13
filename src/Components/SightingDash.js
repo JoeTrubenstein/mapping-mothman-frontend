@@ -202,7 +202,7 @@ class About extends Component {
           <div>
             <Modal show={this.state.showModal} onHide={this.close}>
               <Modal.Header closeButton>
-                <Modal.Title>{this.state.marker.label}</Modal.Title>
+                <Modal.Title>{this.state.marker.witness}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <h4>{this.state.marker.seenDate}</h4>
