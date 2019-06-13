@@ -173,6 +173,7 @@ class About extends Component {
                           Email address
                         </label>
                         <input
+                          name="email"
                           type="email"
                           className="form-control"
                           id="exampleFormControlInput1"
@@ -186,6 +187,7 @@ class About extends Component {
                           Message
                         </label>
                         <textarea
+                          name="message"
                           className="form-control"
                           id="exampleFormControlTextarea1"
                           rows={3}
