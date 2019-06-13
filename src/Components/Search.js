@@ -30,14 +30,14 @@ class Search extends Component {
     }
 
     searchMarkerClicked = (marker) => {
-        console.log(marker)
+        // console.log(marker)
         this.props.appMarkerClicked(marker)
     }
 
     
 
     render() {
-        console.log(this.props.sightings)
+        // console.log(this.props.sightings)
         let items = this.props.sightings;
         let markers = [];
 
