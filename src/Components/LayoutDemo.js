@@ -3,6 +3,8 @@ import NavBar from "../Components/NavBar";
 import "../App.css";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import ReactGA from 'react-ga';
+
 
 class LayoutDemo extends Component {
   state = {
@@ -11,12 +13,20 @@ class LayoutDemo extends Component {
     jwt: ""
   };
 
+  initializeReactGA() {
+    ReactGA.initialize('UA-119540107-6');
+    ReactGA.pageview('/homepage');
+}
+
+  // 
+
   componentDidMount() {
     //console.log('component did mount', 19)
   }
 
   componentWillMount() {
     this.getSightings();
+    this.initializeReactGA();
   }
 
   // set up a fallback image in case no one submits one

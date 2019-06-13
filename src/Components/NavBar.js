@@ -1,12 +1,12 @@
 import React, { Component } from "react";
+import CookieConsent from "react-cookie-consent";
 
 class NavBar extends Component {
-
   render() {
     return (
       <div>
         {/* nav */}
-        < nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
             <a className="navbar-brand" href="../">
               Moth Maps
@@ -24,7 +24,7 @@ class NavBar extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
+                <li className="nav-item">
                   <a className="nav-link" href="../admin-dash">
                     Admins
                   </a>
@@ -48,6 +48,33 @@ class NavBar extends Component {
             </div>
           </div>
         </nav>
+        <CookieConsent
+          buttonText="I understand"
+          cookieName="myAwesomeCookieName2"
+          style={{
+            background:
+              "whitesmoke",
+              color: `black`,
+              border: `1px solid black`
+              
+          }}
+          buttonStyle={{
+            background:
+              "#202020",
+            color: "white",
+            fontWeight: "bolder",
+          }}
+        >
+          This website uses cookies to enhance the user experience.{" "}
+          <span style={{ fontSize: "10px" }}>
+            By using this site, you are consenting to this.
+          </span>
+          <img
+                  width={30}
+                  alt="Mothman Artist's Impression"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Mothman_Artist%27s_Impression.png/512px-Mothman_Artist%27s_Impression.png"
+                />
+        </CookieConsent>
       </div>
     );
   }
