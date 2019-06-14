@@ -3,8 +3,8 @@ import NavBar from "../Components/NavBar";
 import "../App.css";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import ReactGA from 'react-ga';
-
+import ReactGA from "react-ga";
+import { Button, Modal } from "react-bootstrap";
 
 class LayoutDemo extends Component {
   state = {
@@ -14,10 +14,9 @@ class LayoutDemo extends Component {
   };
 
   initializeReactGA() {
-    ReactGA.initialize('UA-119540107-6');
-    ReactGA.pageview('/homepage');
-}
-
+    ReactGA.initialize("UA-119540107-6");
+    ReactGA.pageview("/homepage");
+  }
 
   componentDidMount() {
     //console.log('component did mount', 19)
@@ -79,7 +78,16 @@ class LayoutDemo extends Component {
   showSighting = () => {
     return this.state.sightings.map(sightings => {
       return (
-        <div key={sightings.id}>
+        <div
+          style={{
+            cursor: `pointer`
+          }}
+          // could fat arrowing this change everything??
+          onClick={() => {
+            this.open(sightings);
+          }}
+          key={sightings.id}
+        >
           <div className="row">
             <div className="col-sm">
               <div className="card" style={{ width: "18rem" }}>
@@ -103,12 +111,6 @@ class LayoutDemo extends Component {
           <br />
         </div>
       );
-    });
-  };
-
-  markerClicked = marker => {
-    this.setState({
-      marker: marker
     });
   };
 
@@ -142,6 +144,20 @@ class LayoutDemo extends Component {
       });
   };
 
+  // modal triggers
+  close = () => {
+    this.setState({ showModal: false });
+    console.log(this.state);
+  };
+
+  open = card => {
+    this.setState({
+      showModal: true,
+      card: card
+    });
+    console.log(this.state.card);
+  };
+
   render() {
     return (
       <div
@@ -157,13 +173,13 @@ class LayoutDemo extends Component {
           />
         </Helmet>
         {/* nav */}
-        <NavBar 
-              appAuthFuncFB={this.handleAuthFB}
-              appAuthFuncEmail={this.handleAuthEmail}
-              appAuthSignup={this.authSignUpEmail}
-              user={this.state.email}
-              errorMessage={this.state.flashMessage}
-              appLogout={this.logout}
+        <NavBar
+          appAuthFuncFB={this.handleAuthFB}
+          appAuthFuncEmail={this.handleAuthEmail}
+          appAuthSignup={this.authSignUpEmail}
+          user={this.state.email}
+          errorMessage={this.state.flashMessage}
+          appLogout={this.logout}
         />
 
         <header className="masthead">
@@ -173,10 +189,9 @@ class LayoutDemo extends Component {
                 <h1
                   style={{
                     color: `whitesmoke`,
-                    fontSize: `3.5rem`,
+                    fontSize: `3.5rem`
 
                     // fontFamily: `butcherman`
-
                   }}
                   className="font-weight-light"
                 >
@@ -194,6 +209,35 @@ class LayoutDemo extends Component {
             </div>
           </div>
         </header>
+
+        {this.state.card ? (
+          <Modal show={this.state.showModal} onHide={this.close}>
+            <Modal.Header closeButton>
+              <Modal.Title>{this.state.card.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <h4>{this.state.card.seenDate}</h4>
+              <p>{this.state.card.description}</p>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button
+                ref={el => {
+                  if (el) {
+                    el.style.setProperty(
+                      "background-color",
+                      "#202020",
+                      "important"
+                    );
+                  }
+                }}
+                onClick={this.close}
+              >
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        ) : null}
 
         <div
           style={{
@@ -237,7 +281,7 @@ class LayoutDemo extends Component {
               </ul>
             </div>
           </div>
-          <h3 className="my-4">Most Recent Sightings</h3>
+          <h3 className="my-4">Featured Sightings</h3>
           <div className="card-deck mb-3 text-center">
             {this.showSighting()}
           </div>

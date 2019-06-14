@@ -207,7 +207,6 @@ class About extends Component {
               <Modal.Body>
                 <h4>{this.state.marker.seenDate}</h4>
                 <p>{this.state.marker.desc}</p>
-  
               </Modal.Body>
 
               <Modal.Footer>
