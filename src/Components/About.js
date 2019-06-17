@@ -3,6 +3,8 @@ import "../App.css";
 import NavBar from "../Components/NavBar";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import Form from '../Components/Form';
+
 
 class About extends Component {
   state = {
@@ -180,6 +182,8 @@ class About extends Component {
                 Moth Man project, your story will become available for the rest
                 of the web to see.
               </p>
+              <Form appSubmitSighting={this.submitSighting} />
+
               <div style={{ height: 200 }} />
               <p className="lead mb-0">The Moth Maps Project Team</p>
             </div>

@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import axios from "axios";
 import ReactGA from "react-ga";
 import { Button, Modal } from "react-bootstrap";
+// import Form from "../Components/Form";
 
 class LayoutDemo extends Component {
   state = {
@@ -274,6 +275,7 @@ class LayoutDemo extends Component {
               </p>
 
               <h3 className="my-3">Our Mission</h3>
+
               <ul>
                 <li>Collect Mothman Sightings</li>
                 <li>Connect Mothman Enthusiasts</li>
