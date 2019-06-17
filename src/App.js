@@ -7,7 +7,7 @@ import Sighting from "./Components/Sighting";
 import Form from "./Components/Form";
 import Location from "./Components/Location";
 import axios from "axios";
-import Helmet from "react-helmet"
+import { Helmet } from "react-helmet"
 
 class App extends Component {
   state = {
