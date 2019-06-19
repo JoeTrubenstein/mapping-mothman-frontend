@@ -39,7 +39,7 @@ class LayoutDemo extends Component {
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then(res => {
         let items = res.data;
-        console.log(items);
+        // console.log(items);
 
         let approvedSights = items.filter(item => item.isApproved === true);
 
