@@ -6,7 +6,8 @@ export default class Form extends Component {
   state = {
     uploadedImg: "",
     formSubmit: false,
-    photoSubmit: false
+    photoSubmit: false,
+    location: {"lat": 40.7033127, "lng": -73.979681}
   };
 
   setLocation = formLoc => {
@@ -155,6 +156,7 @@ export default class Form extends Component {
                       className="form-control"
                       id="name"
                       placeholder="Full Name"
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -162,6 +164,7 @@ export default class Form extends Component {
                   </div>
                   <div className="form-group">
                     <input
+                      required
                       type="date"
                       className="form-control"
                       id="date"
@@ -184,6 +187,7 @@ export default class Form extends Component {
                       id="desc"
                       rows={3}
                       placeholder="Describe your experience"
+                      required
                     />
                   </div>
                   <div className="form-group">
