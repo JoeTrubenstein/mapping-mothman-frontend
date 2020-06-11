@@ -74,7 +74,7 @@ class Search extends Component {
                     zoom={5}
                     center={this.state.currentLocation}
                     containerElement={<div style={{ height: 100 + '%'}} /> }
-                    mapElement={<div style={{ height: 100 + 'vh'}} /> }
+                    mapElement={<div style={{ height: 500}} /> }
                     searchMarkerClicked={this.searchMarkerClicked}
                     />
             </div>

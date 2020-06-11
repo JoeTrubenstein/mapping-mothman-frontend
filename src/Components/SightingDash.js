@@ -14,7 +14,7 @@ class About extends Component {
     marker: {},
     sightings: [],
     jwt: "",
-    markerClicked: false
+    markerClicked: false,
   };
 
   initializeReactGA() {
@@ -40,17 +40,17 @@ class About extends Component {
   getSightings = () => {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
-      .then(res => {
+      .then((res) => {
         let items = res.data;
         // console.log(items);
 
-        let approvedSights = items.filter(item => item.isApproved === true);
+        let approvedSights = items.filter((item) => item.isApproved === true);
 
         // console.log(approvedSights);
 
         let sights = [];
 
-        approvedSights.slice(-6).forEach(item => {
+        approvedSights.slice(-6).forEach((item) => {
           const sight = {
             id: item._id,
             name: item.witness,
@@ -58,14 +58,14 @@ class About extends Component {
             image: item.imageUrl,
             description: item.description,
             seenDate: item.seenDate,
-            submitDate: item.submitDate
+            submitDate: item.submitDate,
           };
 
           sights.push(sight);
 
           this.setState(
             {
-              sightings: sights
+              sightings: sights,
             },
             () => {
               // console.log(this.state.sightings)
@@ -73,14 +73,14 @@ class About extends Component {
           );
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
 
   // map the retrieved sightings
   showSighting = () => {
-    return this.state.sightings.map(sightings => {
+    return this.state.sightings.map((sightings) => {
       return (
         <div key={sightings.id}>
           <div className="row">
@@ -117,30 +117,30 @@ class About extends Component {
     this.setState({ showModal: true });
   };
 
-  markerClicked = marker => {
+  markerClicked = (marker) => {
     this.setState({
       marker: marker,
       markerClicked: true,
-      showModal: true
+      showModal: true,
     });
     // console.log(this.state);
   };
 
-  submitSighting = sighting => {
+  submitSighting = (sighting) => {
     let newObj = {
       witness: sighting.name,
       seenDate: sighting.date,
       location: sighting.location,
       description: sighting.desc,
-      imageUrl: sighting.uploadedImg
+      imageUrl: sighting.uploadedImg,
     };
 
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",
-        Authorization: this.state.jwt
-      }
+        Authorization: this.state.jwt,
+      },
     };
     axios
       .post(
@@ -148,10 +148,10 @@ class About extends Component {
         newObj,
         axiosConfig
       )
-      .then(response => {
+      .then((response) => {
         console.log(response);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -160,7 +160,7 @@ class About extends Component {
     return (
       <div
         style={{
-          backgroundColor: `whitesmoke`
+          backgroundColor: `whitesmoke`,
         }}
         id="aboutBackground"
       >
@@ -173,18 +173,13 @@ class About extends Component {
         </Helmet>
         <NavBar />
 
-        <div className="container">
+        <div className="container" style={{ padding: "20px" }}>
           <div className="card border-0 shadow my-5">
             <div
               style={{
-                padding: `5px`
+                padding: `5px`,
               }}
             >
-              <div
-                style={{
-                  height: 10
-                }}
-              />
               <Search
                 appMarkerClicked={this.markerClicked}
                 randomString={"random string"}
@@ -211,7 +206,7 @@ class About extends Component {
 
               <Modal.Footer>
                 <Button
-                  ref={el => {
+                  ref={(el) => {
                     if (el) {
                       el.style.setProperty(
                         "background-color",

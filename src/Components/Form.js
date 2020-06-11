@@ -7,24 +7,24 @@ export default class Form extends Component {
     uploadedImg: "",
     formSubmit: false,
     photoSubmit: false,
-    location: {"lat": 40.7033127, "lng": -73.979681}
+    location: { lat: 40.7033127, lng: -73.979681 },
   };
 
-  setLocation = formLoc => {
+  setLocation = (formLoc) => {
     if (!formLoc) {
       return;
     }
     this.setState({
-      location: formLoc.location
+      location: formLoc.location,
     });
     // console.log(this.state.location)
   };
 
-  closeForm = event => {
+  closeForm = (event) => {
     event.preventDefault();
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
     console.log("the form was submitted.");
     this.setState(
@@ -32,7 +32,7 @@ export default class Form extends Component {
         name: event.target.name.value,
         date: event.target.date.value,
         desc: event.target.desc.value,
-        formSubmit: true
+        formSubmit: true,
       },
       () => {
         this.props.appSubmitSighting(this.state);
@@ -41,19 +41,19 @@ export default class Form extends Component {
 
     setTimeout(() => {
       this.setState({
-        formSubmit: false
+        formSubmit: false,
       });
     }, 5000);
   };
 
-  uploadWidget = event => {
+  uploadWidget = (event) => {
     event.preventDefault();
 
     window.cloudinary.openUploadWidget(
       {
         cloud_name: "dhj95a6jv",
         upload_preset: "ml_default",
-        tags: ["mothman"]
+        tags: ["mothman"],
       },
       (error, result) => {
         if (error) {
@@ -72,16 +72,13 @@ export default class Form extends Component {
               }
             }
 
-            imgName = imgName
-              .split("")
-              .reverse()
-              .join("");
+            imgName = imgName.split("").reverse().join("");
             console.log(imgName);
 
             this.setState({
               uploadedImg: imgUrl,
               imgName: imgName,
-              photoSubmit: true
+              photoSubmit: true,
             });
           }
         }
@@ -93,7 +90,7 @@ export default class Form extends Component {
     return (
       <React.Fragment>
         <div
-          ref={el => {
+          ref={(el) => {
             if (el) {
               el.style.setProperty("width", "100%", "important");
               el.style.setProperty("text-align", "center", "important");
@@ -105,7 +102,7 @@ export default class Form extends Component {
             className="btn btn-primary"
             data-toggle="modal"
             data-target="#exampleModal"
-            ref={el => {
+            ref={(el) => {
               if (el) {
                 el.style.setProperty(
                   "background-color",
@@ -136,7 +133,7 @@ export default class Form extends Component {
                     margin: "15px",
                     padding: "7px",
                     borderRadius: "4px",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   Your sighting has been received! It is now under
@@ -147,7 +144,7 @@ export default class Form extends Component {
               )}
               <form
                 onSubmit={this.submitForm}
-                ref={element => (this.form = element)}
+                ref={(element) => (this.form = element)}
               >
                 <div className="modal-body">
                   <div className="form-group">
@@ -174,7 +171,7 @@ export default class Form extends Component {
 
                   <div className="form-group">
                     <textarea
-                      ref={el => {
+                      ref={(el) => {
                         if (el) {
                           el.style.setProperty(
                             "white-space",
@@ -199,7 +196,7 @@ export default class Form extends Component {
                         style={{
                           backgroundColor: "rgba(200, 200, 200, 0.5)",
                           padding: "3px",
-                          borderRadius: "4px"
+                          borderRadius: "4px",
                         }}
                       >
                         {this.state.imgName}
@@ -213,7 +210,7 @@ export default class Form extends Component {
                     className="btn btn-secondary"
                     data-dismiss="modal"
                     onClick={this.closeForm}
-                    ref={el => {
+                    ref={(el) => {
                       if (el) {
                         el.style.setProperty(
                           "background-color",
@@ -228,7 +225,7 @@ export default class Form extends Component {
                   </button>
                   <button
                     className="btn btn-primary"
-                    ref={el => {
+                    ref={(el) => {
                       if (el) {
                         el.style.setProperty(
                           "background-color",
