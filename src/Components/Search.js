@@ -11,11 +11,6 @@ class Search extends Component {
         }
         
     }
-    
-
-    componentWillMount() {
-        //console.log(this.props.sightings)
-    }
 
     componentDidUpdate(prevProps) {
       

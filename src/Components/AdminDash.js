@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthJWT from "../utils/setAuthJWT";
@@ -6,53 +6,48 @@ import NavBar from "../Components/NavBar";
 import { handleJWTExpirationApi } from "../utils/api";
 import { Helmet } from "react-helmet";
 
-class AdminDash extends React.Component {
-  // declare starting state
-  state = {
-    isAuth: false,
-    marker: {},
-    sightings: [],
-    decoded: {},
-    test: "hello"
-  };
+function AdminDash() {
+  const [isAuth, setAuth] = useState(false);
+  const [sightings, setSightings] = useState([]);
+  const [decoded, setDecoded] = useState({});
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  componentWillMount() {
-    this.getSightings();
+  useEffect(() => {
+    getSightings();
     handleJWTExpirationApi()
       .then(token => {
-        let decoded = jwt_decode(token);
-        this.setState({
-          decoded: decoded,
-          isAuth: true
-        });
+        const decoded = jwt_decode(token);
+       
+        setDecoded(decoded);
+        setAuth(true);
       })
       .catch(error => {
-        this.setState({
-          message: error,
-          isAuth: false
-        });
+          console.log(error);
+          setAuth(false);
       });
-  }
+  }, [])
+    
 
   // populate the state with the input values on change
-  loginValues = event => {
-    this.setState(
-      {
-        [event.target.name]: event.target.value
-      },
-      () => {}
-    );
+  const loginValues = event => {
+    if(event.target.name === 'password') {
+      setPassword(event.target.value);
+    }
+    else if(event.target.name === 'email') {
+      setEmail(event.target.value);
+    }
   };
 
   // sign in to generate a JWT from the backend
-  login = event => {
+  const login = event => {
     // stop page from clearing the state prematurely
     event.preventDefault();
 
     // get the login params from the state
     let config = {
-      email: this.state.email,
-      password: this.state.pw
+      email: email,
+      password: password
     };
 
     axios
@@ -62,12 +57,8 @@ class AdminDash extends React.Component {
         localStorage.setItem("jwtToken", token);
         const decoded = jwt_decode(token);
         setAuthJWT(token);
-        this.setState({
-          // add the decoded JWT to the state
-          decoded: decoded,
-          // toggle the auth boolean
-          isAuth: true
-        });
+        setDecoded(decoded);
+        setAuth(true);
       })
       .catch(error => {
         console.log(error);
@@ -75,15 +66,13 @@ class AdminDash extends React.Component {
   };
 
   // destroy the token in local storage, remove decoded token from state, and toggle the auth boolean
-  logout = () => {
-    this.setState({
-      decoded: {},
-      isAuth: false
-    });
+  const logout = () => {
+    setDecoded({});
+    setAuth(false);
     localStorage.removeItem("jwtToken");
   };
 
-  rejectSighting = sightingID => {
+  const rejectSighting = sightingID => {
     let config = {
       id: sightingID
     };
@@ -94,14 +83,14 @@ class AdminDash extends React.Component {
         config
       )
       .then(() => {
-        this.getSightings();
+        getSightings();
       })
       .catch(error => {
         console.log(error);
       });
   };
 
-  approveSighting = sightingID => {
+  const approveSighting = sightingID => {
     let config = {
       id: sightingID
     };
@@ -112,7 +101,7 @@ class AdminDash extends React.Component {
         config
       )
       .then(() => {
-        this.getSightings();
+        getSightings();
       })
       .catch(error => {
         console.log(error);
@@ -120,13 +109,13 @@ class AdminDash extends React.Component {
   };
 
   // set up a fallback image in case no one submits one
-  addDefaultSrc(ev) {
+ const addDefaultSrc = (ev) => {
     ev.target.src =
       "https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png";
   }
 
   // retrieve all the sightings from the MLAB DB
-  getSightings = () => {
+  const getSightings = () => {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then(res => {
@@ -146,14 +135,8 @@ class AdminDash extends React.Component {
           };
 
           sights.push(sight);
-
-          this.setState(
-            {
-              sightings: sights
-            },
-            () => {}
-          );
         });
+        setSightings(sights);
       })
       .catch(error => {
         console.log(error);
@@ -161,8 +144,8 @@ class AdminDash extends React.Component {
   };
 
   // map the retrieved sightings
-  showApprovedSightings = () => {
-    let approvedSights = this.state.sightings.filter(
+  const showApprovedSightings = () => {
+    let approvedSights = sightings.filter(
       item => item.isApproved === true
     );
 
@@ -173,7 +156,7 @@ class AdminDash extends React.Component {
             <div className="col-sm">
               <div className="card" style={{ width: "18rem" }}>
                 <img
-                  onError={this.addDefaultSrc}
+                  onError={addDefaultSrc}
                   src={sightings.image}
                   className="card-img-top"
                   alt="mothman sighting"
@@ -200,7 +183,7 @@ class AdminDash extends React.Component {
                       {/* This type of function must be fat arrowed!! or else it will run on render */}
                       <button
                         onClick={() => {
-                          this.rejectSighting(sightings.id);
+                          rejectSighting(sightings.id);
                         }}
                       >
                         Reject
@@ -218,8 +201,8 @@ class AdminDash extends React.Component {
     });
   };
 
-  showPendingSightings = () => {
-    let pendingSights = this.state.sightings.filter(
+  const showPendingSightings = () => {
+    let pendingSights = sightings.filter(
       item => item.isApproved === false
     );
 
@@ -230,7 +213,7 @@ class AdminDash extends React.Component {
             <div className="col-sm">
               <div className="card" style={{ width: "18rem" }}>
                 <img
-                  onError={this.addDefaultSrc}
+                  onError={addDefaultSrc}
                   src={sightings.image}
                   className="card-img-top"
                   alt="mothman sighting"
@@ -257,7 +240,7 @@ class AdminDash extends React.Component {
                       {/* This type of function must be fat arrowed!! or else it will run on render */}
                       <button
                         onClick={() => {
-                          this.approveSighting(sightings.id);
+                          approveSighting(sightings.id);
                         }}
                       >
                         Approve
@@ -275,9 +258,6 @@ class AdminDash extends React.Component {
     });
   };
 
-  render() {
-    // retrieve the auth boolean from the state
-    const { isAuth } = this.state;
     return (
       <div>
         <Helmet>
@@ -293,11 +273,11 @@ class AdminDash extends React.Component {
         <input
           className="form-control mr-sm-2"
           type="password"
-          name="pw"
+          name="password"
           placeholder="Password"
           aria-label="Password"
-          onChange={this.loginValues}
-          value={this.state.password}
+          onChange={loginValues}
+          value={password}
         />
 
         <header>
@@ -316,10 +296,10 @@ class AdminDash extends React.Component {
           // if authorized -> show this
           <div className="row h-100 align-items-center">
             <div className="col-12 text-center">
-              <h3>Logged in as {this.state.decoded.email}</h3>
+              <h3>Logged in as {decoded.email}</h3>
               <button
                 className="btn btn-outline my-2 my-sm-0"
-                onClick={this.logout}
+                onClick={logout}
               >
                 Logout
               </button>
@@ -327,14 +307,14 @@ class AdminDash extends React.Component {
             <div className="col-12 text-center">
               <h3>Approved</h3>
               <div className="card-deck mb-3 text-center">
-                {this.showApprovedSightings()}
+                {showApprovedSightings()}
               </div>
             </div>
 
             <div className="col-12 text-center">
               <h3>Needs Approval</h3>
               <div className="card-deck mb-3 text-center">
-                {this.showPendingSightings()}
+                {showPendingSightings()}
               </div>
             </div>
           </div>
@@ -379,8 +359,8 @@ class AdminDash extends React.Component {
                   placeholder="email"
                   aria-label="userName"
                   // run the value functions so these fields can be saved in the state, then used in the POST request
-                  onChange={this.loginValues}
-                  value={this.state.decoded.username}
+                  onChange={loginValues}
+                  value={decoded.username}
                 />
                 <label htmlFor="inputPassword" className="sr-only">
                   Password
@@ -388,11 +368,11 @@ class AdminDash extends React.Component {
                 <input
                   className="form-control mr-sm-2"
                   type="password"
-                  name="pw"
+                  name="password"
                   placeholder="Password"
                   aria-label="Password"
-                  onChange={this.loginValues}
-                  value={this.state.password}
+                  onChange={loginValues}
+                  value={password}
                 />
                 <div className="checkbox mb-3">
                   {/* <label>
@@ -411,21 +391,20 @@ class AdminDash extends React.Component {
                     }
                   }}
                   className="btn btn-lg btn-primary btn-block"
-                  onClick={this.login}
+                  onClick={login}
                 >
                   Sign in
                 </button>
                 <p className="mt-5 mb-3 text-muted">
-                  ©2019 The Moth Maps Project{" "}
+                  ©2019 - 2020 The Moth Maps Project{" "}
                 </p>
               </form>
             </div>
           </div>
         )}
-
         <div className="container-fluid" />
       </div>
     );
-  }
 }
+
 export default AdminDash;

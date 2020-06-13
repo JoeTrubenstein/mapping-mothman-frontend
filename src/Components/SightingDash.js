@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import Search from "../Components/Search";
 import NavBar from "../Components/NavBar";
@@ -9,44 +9,30 @@ import { Button, Modal } from "react-bootstrap";
 
 import axios from "axios";
 
-class About extends Component {
-  state = {
-    marker: {},
-    sightings: [],
-    jwt: "",
-    markerClicked: false,
-  };
+function SigntingDash() {
+  const [marker, setMarker] = useState({});
+  const [sightings, setSightings] = useState([]);
+  const [jwt] = useState('');
+  const [markerClicked, setMarkerClicked] = useState(false);
+  const [modal, setModal] = useState(false);
 
-  initializeReactGA() {
+  const initializeReactGA = () => {
     ReactGA.initialize("UA-119540107-6");
     ReactGA.pageview("/sightings-dashboard");
-  }
+  };
 
-  componentDidMount() {
-    //console.log('component did mount', 19)
-  }
+  useEffect(() => {
+    getSightings();
+    initializeReactGA();
+  });
 
-  componentWillMount() {
-    this.getSightings();
-    this.initializeReactGA();
-  }
-
-  // set up a fallback image in case no one submits one
-  addDefaultSrc(ev) {
-    ev.target.src =
-      "https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png";
-  }
-
-  getSightings = () => {
+  const getSightings = () => {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then((res) => {
         let items = res.data;
-        // console.log(items);
 
         let approvedSights = items.filter((item) => item.isApproved === true);
-
-        // console.log(approvedSights);
 
         let sights = [];
 
@@ -62,71 +48,25 @@ class About extends Component {
           };
 
           sights.push(sight);
-
-          this.setState(
-            {
-              sightings: sights,
-            },
-            () => {
-              // console.log(this.state.sightings)
-            }
-          );
         });
+        setSightings(sights);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  // map the retrieved sightings
-  showSighting = () => {
-    return this.state.sightings.map((sightings) => {
-      return (
-        <div key={sightings.id}>
-          <div className="row">
-            <div className="col-sm">
-              <div className="card" style={{ width: "18rem" }}>
-                <img
-                  onError={this.addDefaultSrc}
-                  src={sightings.image}
-                  className="card-img-top"
-                  alt="mothman sighting"
-                  style={{ maxHeight: `200px` }}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{sightings.name}</h5>
-                  <p className="card-text">
-                    {sightings.submitDate.slice(0, -12)}
-                  </p>
-                </div>
-              </div>
-              <br />
-            </div>
-          </div>
-          <br />
-        </div>
-      );
-    });
+  const closeModal = () => {
+    setModal(false);
   };
 
-  close = () => {
-    this.setState({ showModal: false });
+  const onMarkerClick = (marker) => {
+    setMarker(marker);
+    setMarkerClicked(true);
+    setModal(true);
   };
 
-  open = () => {
-    this.setState({ showModal: true });
-  };
-
-  markerClicked = (marker) => {
-    this.setState({
-      marker: marker,
-      markerClicked: true,
-      showModal: true,
-    });
-    // console.log(this.state);
-  };
-
-  submitSighting = (sighting) => {
+  const submitSighting = (sighting) => {
     let newObj = {
       witness: sighting.name,
       seenDate: sighting.date,
@@ -139,7 +79,7 @@ class About extends Component {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",
-        Authorization: this.state.jwt,
+        Authorization: jwt,
       },
     };
     axios
@@ -156,7 +96,6 @@ class About extends Component {
       });
   };
 
-  render() {
     return (
       <div
         style={{
@@ -181,27 +120,27 @@ class About extends Component {
               }}
             >
               <Search
-                appMarkerClicked={this.markerClicked}
+                appMarkerClicked={onMarkerClick}
                 randomString={"random string"}
-                sightings={this.state.sightings}
+                sightings={sightings}
               />
             </div>
           </div>
         </div>
 
-        <Form appSubmitSighting={this.submitSighting} />
+        <Form appSubmitSighting={submitSighting} />
 
         <div style={{ height: 40 }} />
 
-        {this.state.markerClicked ? (
+        {markerClicked ? (
           <div>
-            <Modal show={this.state.showModal} onHide={this.close}>
+            <Modal show={modal} onHide={closeModal}>
               <Modal.Header closeButton>
-                <Modal.Title>{this.state.marker.witness}</Modal.Title>
+                <Modal.Title>{marker.witness}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <h4>{this.state.marker.seenDate}</h4>
-                <p>{this.state.marker.desc}</p>
+                <h4>{marker.seenDate}</h4>
+                <p>{marker.desc}</p>
               </Modal.Body>
 
               <Modal.Footer>
@@ -215,7 +154,7 @@ class About extends Component {
                       );
                     }
                   }}
-                  onClick={this.close}
+                  onClick={closeModal}
                 >
                   Close
                 </Button>
@@ -224,15 +163,13 @@ class About extends Component {
           </div>
         ) : null}
 
-        {/* {this.showSighting()} */}
         <footer id="sticky-footer" className="py-4 bg-dark text-white-50">
           <div className="container text-center">
-            <small>Copyright ©2019 Moth Maps</small>
+            <small>Copyright ©2019 - 2020 Moth Maps</small>
           </div>
         </footer>
       </div>
     );
-  }
-}
+};
 
-export default About;
+export default SigntingDash;

@@ -1,35 +1,24 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Search from "./Components/Search";
 import Nav from "./Components/Nav";
 import Sighting from "./Components/Sighting";
 import Form from "./Components/Form";
-import Location from "./Components/Location";
 import axios from "axios";
 import { Helmet } from "react-helmet"
 
-class App extends Component {
-  state = {
-    marker: {},
-    sightings: [],
-    jwt: ""
-  };
+function App() {
+  const [marker, setMarker] = useState({});
+  const [sightings, setSightings] = useState([]);
+  const [jwt, setJWT] = useState('');
 
-  componentDidMount() {
-    //console.log('component did mount', 19)
-  }
-
-  getSightings = () => {
+  const getSightings = () => {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then(res => {
         let items = res.data;
-        console.log(items);
 
         let approvedSights = items.filter(item => item.isApproved === true);
-
-        console.log(approvedSights);
 
         let sights = [];
 
@@ -44,14 +33,7 @@ class App extends Component {
 
           sights.push(sight);
 
-          this.setState(
-            {
-              sightings: sights
-            },
-            () => {
-              // console.log(this.state.sightings)
-            }
-          );
+          setSightings(sights);
         });
       })
       .catch(error => {
@@ -59,21 +41,15 @@ class App extends Component {
       });
   };
 
-  componentWillMount() {
-    this.getSightings();
-  }
+  useEffect(() => {
+    getSightings();
+  }, []);
 
-  markerClicked = marker => {
-    // console.log('we made to app')
-    // console.log(marker)
-    this.setState({
-      marker: marker
-    });
-    // console.log(this.state.marker)
+  const markerClicked = marker => {
+    setMarker(marker);
   };
 
-  submitSighting = sighting => {
-    // console.log(sighting);
+  const submitSighting = sighting => {
     let newObj = {
       witness: sighting.name,
       seenDate: sighting.date,
@@ -81,13 +57,12 @@ class App extends Component {
       description: sighting.desc,
       imageUrl: sighting.uploadedImg
     };
-    console.log(newObj);
 
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",
-        Authorization: this.state.jwt
+        Authorization: jwt
       }
     };
     axios
@@ -104,7 +79,6 @@ class App extends Component {
       });
   };
 
-  render() {
     return (
       <div style={{ backgroundColor: "black", color: "white" }}>
         <Helmet>
@@ -122,25 +96,24 @@ class App extends Component {
         >
           <div className="col-md-6">
             <Search
-              appMarkerClicked={this.markerClicked}
+              appMarkerClicked={markerClicked}
               randomString={"random string"}
-              sightings={this.state.sightings}
+              sightings={sightings}
             />
           </div>
           <div
             className="col-md-6"
             style={{ backgroundColor: "black", color: "white" }}
           >
-            <Sighting stuff={"ummmmm"} marker={this.state.marker} />
+            <Sighting stuff={"ummmmm"} marker={marker} />
           </div>
         </div>
 
         <div style={{ backgroundColor: "black", color: "white" }}>
-          <Form appSubmitSighting={this.submitSighting} />
+          <Form appSubmitSighting={submitSighting} />
         </div>
       </div>
     );
-  }
-}
+};
 
 export default App;
