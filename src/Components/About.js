@@ -5,10 +5,10 @@ import { Helmet } from "react-helmet";
 import Form from '../Components/Form';
 import axios from "axios";
 
-function About() {
+const About = () => {
 
   const submitSighting = sighting => {
-    let newObj = {
+    const newObj = {
       witness: sighting.name,
       seenDate: sighting.date,
       location: sighting.location,
@@ -16,7 +16,7 @@ function About() {
       imageUrl: sighting.uploadedImg
     };
 
-    let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",

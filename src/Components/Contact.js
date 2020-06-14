@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import "../App.css";
 import NavBar from "../Components/NavBar";
 
-function Contact() {
+const Contact = () => {
   return (
     <div
       style={{

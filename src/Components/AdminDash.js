@@ -6,7 +6,7 @@ import NavBar from "../Components/NavBar";
 import { handleJWTExpirationApi } from "../utils/api";
 import { Helmet } from "react-helmet";
 
-function AdminDash() {
+const AdminDash = () => {
   const [isAuth, setAuth] = useState(false);
   const [sightings, setSightings] = useState([]);
   const [decoded, setDecoded] = useState({});
@@ -18,7 +18,6 @@ function AdminDash() {
     handleJWTExpirationApi()
       .then(token => {
         const decoded = jwt_decode(token);
-       
         setDecoded(decoded);
         setAuth(true);
       })
@@ -45,7 +44,7 @@ function AdminDash() {
     event.preventDefault();
 
     // get the login params from the state
-    let config = {
+    const config = {
       email: email,
       password: password
     };
@@ -73,7 +72,7 @@ function AdminDash() {
   };
 
   const rejectSighting = sightingID => {
-    let config = {
+    const config = {
       id: sightingID
     };
 
@@ -91,7 +90,7 @@ function AdminDash() {
   };
 
   const approveSighting = sightingID => {
-    let config = {
+    const config = {
       id: sightingID
     };
 
@@ -119,9 +118,9 @@ function AdminDash() {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then(res => {
-        let items = res.data;
+        const items = res.data;
 
-        let sights = [];
+        const sights = [];
 
         items.forEach(item => {
           const sight = {
@@ -145,7 +144,7 @@ function AdminDash() {
 
   // map the retrieved sightings
   const showApprovedSightings = () => {
-    let approvedSights = sightings.filter(
+    const approvedSights = sightings.filter(
       item => item.isApproved === true
     );
 
@@ -202,7 +201,7 @@ function AdminDash() {
   };
 
   const showPendingSightings = () => {
-    let pendingSights = sightings.filter(
+    const pendingSights = sightings.filter(
       item => item.isApproved === false
     );
 

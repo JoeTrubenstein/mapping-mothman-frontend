@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import NavBar from "../Components/NavBar";
 
-function Login() {
+const Login = () => {
     return (
       <div
         style={{

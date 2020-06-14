@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import CookieConsent from "react-cookie-consent";
 
-class NavBar extends Component {
-  render() {
+const NavBar = () => {
     return (
       <div>
         {/* nav */}
@@ -77,7 +76,6 @@ class NavBar extends Component {
         </CookieConsent>
       </div>
     );
-  }
-}
+};
 
 export default NavBar;

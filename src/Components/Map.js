@@ -1,67 +1,40 @@
-import React, { Component } from "react";
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
+import { functions, isEqual, omit } from 'lodash'
+import React, { useState, useEffect, useRef } from 'react'
 
-class Map extends Component {
-  state = {
-    map: null
-  };
+const Map = ({ options, onMount, className, onMountProps }) => {
+    const ref = useRef();
+    const [map, setMap] = useState();
 
-  mapMoved() {
-    console.log(JSON.stringify(this.state.map.getCenter()));
-    if (this.props.locationChanged !== null) {
-      this.props.locationChanged(this.state.map.getCenter());
-    }
-  }
+    useEffect(() => {
+        const onLoad = () => setMap(new window.google.maps.Map(ref.current, { ...options }));
+        if (!window.google) {
+            const script = document.createElement(`script`)
+            script.src =
+                `https://maps.googleapis.com/maps/api/js?key=` +
+                process.env.GOOGLE_MAPS_API_KEY
+            document.head.append(script)
+            script.addEventListener(`load`, onLoad)
+            return () => script.removeEventListener(`load`, onLoad)
+        } else onLoad();
+    }, [options]);
 
-  zoomChanged() {}
-
-  mapLoaded(map) {
-    if (this.state.map != null) return;
-
-    this.props.onMapReady(map);
-    this.setState({
-      map: map
-    });
-  }
-
-  handleMarkerClick(marker) {
-    // console.log(marker)
-    this.props.searchMarkerClicked(marker);
-  }
-
-  render() {
-    const markers = this.props.markers;
-
-    const fancyStyle = require("./fancyStyle.json");
+    if (map && typeof onMount === `function`) onMount(map, onMountProps);
 
     return (
-      <GoogleMap
-        ref={this.mapLoaded.bind(this)}
-        onDragEnd={this.mapMoved.bind(this)}
-        onZoomChanged={this.zoomChanged.bind(this)}
-        defaultZoom={this.props.zoom}
-        defaultCenter={this.props.center}
-        defaultOptions={{ styles: fancyStyle }}
-      >
-        <MarkerClusterer>
-          {markers.map((marker, index) => {
-            return (
-        
-              <Marker
-                key={index}
-                clickable={true}
-                icon={marker.icon}
-                onClick={this.handleMarkerClick.bind(this, marker)}
-                {...marker}
-              />
-             
-            );
-          })}
-        </MarkerClusterer>
-      </GoogleMap>
-    );
-  }
-}
+        <div
+            style={{ height: `68vh`, borderRadius: `0.5em` }}
+            {...{ ref, className }}
+        />
+    )
+};
 
-export default withGoogleMap(Map);
+function shouldNotUpdate(props, nextProps) {
+        const [funcs, nextFuncs] = [functions(props), functions(nextProps)]
+        const noPropChange = isEqual(omit(props, funcs), omit(nextProps, nextFuncs))
+        const noFuncChange =
+        funcs.length === nextFuncs.length &&
+        funcs.every(fn => props[fn].toString() === nextProps[fn].toString())
+        return noPropChange && noFuncChange
+    }
+
+export default React.memo(Map, shouldNotUpdate)

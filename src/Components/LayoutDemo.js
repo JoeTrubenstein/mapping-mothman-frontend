@@ -6,7 +6,7 @@ import axios from "axios";
 import ReactGA from "react-ga";
 import { Button, Modal } from "react-bootstrap";
 
-function LayoutDemo() {
+const LayoutDemo = () => {
   const [sightings, setSightings] = useState([]);
   const [modal, setModal] = useState(false);
   const [card, setCard] = useState(null);
@@ -31,11 +31,11 @@ function LayoutDemo() {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then(res => {
-        let items = res.data;
+        const items = res.data;
 
-        let approvedSights = items.filter(item => item.isApproved === true);
+        const approvedSights = items.filter(item => item.isApproved === true);
 
-        let sights = [];
+        const sights = [];
 
         approvedSights.slice(-6).forEach(item => {
           const sight = {

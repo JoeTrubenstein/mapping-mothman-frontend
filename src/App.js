@@ -16,11 +16,11 @@ function App() {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then(res => {
-        let items = res.data;
+        const items = res.data;
 
-        let approvedSights = items.filter(item => item.isApproved === true);
+        const approvedSights = items.filter(item => item.isApproved === true);
 
-        let sights = [];
+        const sights = [];
 
         approvedSights.forEach(item => {
           const sight = {
@@ -50,7 +50,7 @@ function App() {
   };
 
   const submitSighting = sighting => {
-    let newObj = {
+    const newObj = {
       witness: sighting.name,
       seenDate: sighting.date,
       location: sighting.location,
@@ -58,7 +58,7 @@ function App() {
       imageUrl: sighting.uploadedImg
     };
 
-    let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",

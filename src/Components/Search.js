@@ -1,81 +1,62 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Map from './Map';
+import MarkerClusterer from '@google/markerclustererplus';
 
-class Search extends Component {
+const Search = ({sightings, appMarkerClicked}) => {
 
-    state = {
-        map: null, 
-        currentLocation: {
-            lat: 40.759990,
-            lng: -73.991210
+    const searchMarkerClicked = (marker) => {
+        appMarkerClicked(marker)
+    };
+
+    const addMarkers = (map, markers) => {
+        const mapMarkers = [];
+        markers.forEach((marker) => {
+          const mapMarker = new window.google.maps.Marker({
+            position: marker.position,
+            label: null,
+            title: marker.witness,
+          })
+          mapMarker.addListener(`click`, () => {
+            searchMarkerClicked(marker)
+          });
+          mapMarkers.push(mapMarker);
+        });
+        new MarkerClusterer(map, mapMarkers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+      }
+
+    const items = sightings;
+    const markers = [];
+
+    items.forEach( item => {
+
+        const marker = {
+            key: item.id, 
+            witness: item.name,
+            position: item.position,
+            defaultAnimation: 2,
+            image: item.image,
+            desc: item.description,
+            seenDate: item.seenDate
         }
+        markers.push(marker)
+    });
         
-    }
-
-    componentDidUpdate(prevProps) {
-      
-    }
-
-    centerChanged = (center) => {
-        
-        this.setState({
-            currentLocation: center
-        })
-        
-    }
-
-    searchMarkerClicked = (marker) => {
-        // console.log(marker)
-        this.props.appMarkerClicked(marker)
-    }
-
+    const fancyStyle = require("./fancyStyle.json");
     
-
-    render() {
-        // console.log(this.props.sightings)
-        let items = this.props.sightings;
-        let markers = [];
-
-        items.forEach( item => {
-
-            const marker = {
-                key: item.id, 
-                witness: item.name,
-                //label: item.name, 
-                position: item.position,
-                defaultAnimation: 2,
-                image: item.image,
-                desc: item.description,
-                seenDate: item.seenDate
-            }
-            markers.push(marker)
-        })
-     
         return (
-            
             <div>
                 <Map
-                    onMapReady={ (map) => {
-                        if (this.state.map != null)
-                            return;
-                     
-                        this.setState({
-                            map:map
-                        })
+                    options={{
+                        center: { lat: 40, lng: -80 },
+                        zoom: 5,
+                        styles: fancyStyle
                     }}
-
-                    locationChanged={this.centerChanged.bind(this)}
-                    markers={markers}
-                    zoom={5}
-                    center={this.state.currentLocation}
-                    containerElement={<div style={{ height: 100 + '%'}} /> }
-                    mapElement={<div style={{ height: 500}} /> }
-                    searchMarkerClicked={this.searchMarkerClicked}
-                    />
-            </div>
-        )
-    }
-}
-
+                    onMount={addMarkers}
+                    onMountProps={markers}
+                />
+        </div>
+    )
+};
 
 export default Search;

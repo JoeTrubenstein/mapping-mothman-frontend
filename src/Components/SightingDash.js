@@ -9,7 +9,7 @@ import { Button, Modal } from "react-bootstrap";
 
 import axios from "axios";
 
-function SigntingDash() {
+const SigntingDash = () => {
   const [marker, setMarker] = useState({});
   const [sightings, setSightings] = useState([]);
   const [jwt] = useState('');
@@ -30,11 +30,11 @@ function SigntingDash() {
     axios
       .get("https://mothman-server.herokuapp.com/users/get-sightings")
       .then((res) => {
-        let items = res.data;
+        const items = res.data;
 
-        let approvedSights = items.filter((item) => item.isApproved === true);
+        const approvedSights = items.filter((item) => item.isApproved === true);
 
-        let sights = [];
+        const sights = [];
 
         approvedSights.slice(-6).forEach((item) => {
           const sight = {
@@ -67,7 +67,7 @@ function SigntingDash() {
   };
 
   const submitSighting = (sighting) => {
-    let newObj = {
+    const newObj = {
       witness: sighting.name,
       seenDate: sighting.date,
       location: sighting.location,
@@ -75,7 +75,7 @@ function SigntingDash() {
       imageUrl: sighting.uploadedImg,
     };
 
-    let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",

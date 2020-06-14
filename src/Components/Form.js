@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Location from "./Location";
-// import cloudinary from 'cloudinary';
 
-function Form({ appSubmitSighting }) {
+ const Form = ({ appSubmitSighting }) => {
   const [img, setImg] = useState({});
   const [formSubmit, setFormSubmit] = useState(false);
   const [photoSubmit, setPhotoSubmit] = useState(false);
@@ -20,6 +19,7 @@ function Form({ appSubmitSighting }) {
   };
 
   const submitForm = (event) => {
+    event.preventDefault();
     const sightingObj = {
         name: event.target.name.value,
         date: event.target.date.value,
@@ -49,8 +49,7 @@ function Form({ appSubmitSighting }) {
           console.log(error);
         } else {
           if (result.event === "success") {
-            console.log(result.info.secure_url);
-            let imgUrl = result.info.secure_url;
+            const imgUrl = result.info.secure_url;
 
             let imgName = "";
             for (let i = imgUrl.length - 1; i > 1; i--) {
@@ -62,7 +61,6 @@ function Form({ appSubmitSighting }) {
             }
 
             imgName = imgName.split("").reverse().join("");
-            console.log(imgName);
 
             const imgObj = {
               url: imgUrl,
