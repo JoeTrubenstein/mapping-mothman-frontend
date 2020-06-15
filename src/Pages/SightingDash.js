@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../App.css";
 import Search from "../Components/Search";
 import NavBar from "../Components/NavBar";
@@ -6,15 +6,14 @@ import Form from "../Components/Form";
 import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 import { Button, Modal } from "react-bootstrap";
-
-import axios from "axios";
+import { Context } from '../Context/GlobalState';
 
 const SigntingDash = () => {
   const [marker, setMarker] = useState({});
-  const [sightings, setSightings] = useState([]);
-  const [jwt] = useState('');
   const [markerClicked, setMarkerClicked] = useState(false);
   const [modal, setModal] = useState(false);
+
+  const { sightings, getSightings } = useContext(Context);
 
   const initializeReactGA = () => {
     ReactGA.initialize("UA-119540107-6");
@@ -24,37 +23,7 @@ const SigntingDash = () => {
   useEffect(() => {
     getSightings();
     initializeReactGA();
-  });
-
-  const getSightings = () => {
-    axios
-      .get("https://mothman-server.herokuapp.com/users/get-sightings")
-      .then((res) => {
-        const items = res.data;
-
-        const approvedSights = items.filter((item) => item.isApproved === true);
-
-        const sights = [];
-
-        approvedSights.slice(-6).forEach((item) => {
-          const sight = {
-            id: item._id,
-            name: item.witness,
-            position: item.location,
-            image: item.imageUrl,
-            description: item.description,
-            seenDate: item.seenDate,
-            submitDate: item.submitDate,
-          };
-
-          sights.push(sight);
-        });
-        setSightings(sights);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  }, []);
 
   const closeModal = () => {
     setModal(false);
@@ -64,36 +33,6 @@ const SigntingDash = () => {
     setMarker(marker);
     setMarkerClicked(true);
     setModal(true);
-  };
-
-  const submitSighting = (sighting) => {
-    const newObj = {
-      witness: sighting.name,
-      seenDate: sighting.date,
-      location: sighting.location,
-      description: sighting.desc,
-      imageUrl: sighting.uploadedImg,
-    };
-
-    const axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: jwt,
-      },
-    };
-    axios
-      .post(
-        "https://mothman-server.herokuapp.com/users/new-sighting",
-        newObj,
-        axiosConfig
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
     return (
@@ -128,7 +67,7 @@ const SigntingDash = () => {
           </div>
         </div>
 
-        <Form appSubmitSighting={submitSighting} />
+        <Form />
 
         <div style={{ height: 40 }} />
 

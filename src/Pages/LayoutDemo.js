@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../Components/NavBar";
 import "../App.css";
 import { Helmet } from "react-helmet";
-import axios from "axios";
 import ReactGA from "react-ga";
 import { Button, Modal } from "react-bootstrap";
+import { Context } from '../Context/GlobalState';
 
 const LayoutDemo = () => {
-  const [sightings, setSightings] = useState([]);
   const [modal, setModal] = useState(false);
   const [card, setCard] = useState(null);
+
+   const { sightings, getSightings } = useContext(Context);
 
   const initializeReactGA = () => {
     ReactGA.initialize("UA-119540107-6");
@@ -26,35 +27,6 @@ const LayoutDemo = () => {
     ev.target.src =
       "https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png";
   }
-
-  const getSightings = () => {
-    axios
-      .get("https://mothman-server.herokuapp.com/users/get-sightings")
-      .then(res => {
-        const items = res.data;
-
-        const approvedSights = items.filter(item => item.isApproved === true);
-
-        const sights = [];
-
-        approvedSights.slice(-6).forEach(item => {
-          const sight = {
-            id: item._id,
-            name: item.witness,
-            position: item.location,
-            image: item.imageUrl,
-            description: item.description,
-            seenDate: item.seenDate,
-            submitDate: item.submitDate
-          };
-          sights.push(sight);
-        });
-        setSightings(sights);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
 
   // map the retrieved sightings
   const showSighting = () => {

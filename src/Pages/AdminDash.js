@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthJWT from "../utils/setAuthJWT";
 import NavBar from "../Components/NavBar";
 import { handleJWTExpirationApi } from "../utils/api";
 import { Helmet } from "react-helmet";
+import { Context } from '../Context/GlobalState';
 
 const AdminDash = () => {
   const [isAuth, setAuth] = useState(false);
-  const [sightings, setSightings] = useState([]);
   const [decoded, setDecoded] = useState({});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { sightings, getSightings, approveSighting, rejectSighting } = useContext(Context);
+
   useEffect(() => {
-    getSightings();
+    getSightings(true);
     handleJWTExpirationApi()
       .then(token => {
         const decoded = jwt_decode(token);
@@ -71,76 +73,11 @@ const AdminDash = () => {
     localStorage.removeItem("jwtToken");
   };
 
-  const rejectSighting = sightingID => {
-    const config = {
-      id: sightingID
-    };
-
-    axios
-      .post(
-        "https://mothman-server.herokuapp.com/users/admin-dashboard/reject-sighting",
-        config
-      )
-      .then(() => {
-        getSightings();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const approveSighting = sightingID => {
-    const config = {
-      id: sightingID
-    };
-
-    axios
-      .post(
-        "https://mothman-server.herokuapp.com/users/admin-dashboard/approve-sighting",
-        config
-      )
-      .then(() => {
-        getSightings();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
   // set up a fallback image in case no one submits one
  const addDefaultSrc = (ev) => {
     ev.target.src =
       "https://creationexotheology.files.wordpress.com/2017/09/20170913_123642.png";
   }
-
-  // retrieve all the sightings from the MLAB DB
-  const getSightings = () => {
-    axios
-      .get("https://mothman-server.herokuapp.com/users/get-sightings")
-      .then(res => {
-        const items = res.data;
-
-        const sights = [];
-
-        items.forEach(item => {
-          const sight = {
-            id: item._id,
-            name: item.witness,
-            position: item.location,
-            image: item.imageUrl,
-            description: item.description,
-            isApproved: item.isApproved,
-            seenDate: item.seenDate
-          };
-
-          sights.push(sight);
-        });
-        setSightings(sights);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
 
   // map the retrieved sightings
   const showApprovedSightings = () => {

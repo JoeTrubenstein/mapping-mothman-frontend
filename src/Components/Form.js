@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Location from "./Location";
+import { Context } from '../Context/GlobalState';
 
- const Form = ({ appSubmitSighting }) => {
+ const Form = () => {
   const [img, setImg] = useState({});
   const [formSubmit, setFormSubmit] = useState(false);
   const [photoSubmit, setPhotoSubmit] = useState(false);
   const [location, setLocation] = useState({ lat: 40.7033127, lng: -73.979681 });
+
+  const { submitSighting } = useContext(Context);
 
   const onSetLocation = (formLoc) => {
     if (!formLoc) {
@@ -27,7 +30,7 @@ import Location from "./Location";
         location: location,
         uploadedImg: img.url
     };
-    appSubmitSighting(sightingObj);
+    submitSighting(sightingObj);
     setFormSubmit(true);
 
     setTimeout(() => {
