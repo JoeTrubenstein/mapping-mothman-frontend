@@ -20,7 +20,8 @@ const LayoutDemo = () => {
   useEffect(() => {
     getSightings();
     initializeReactGA();
-  }, [getSightings]);
+    // eslint-disable-next-line
+  }, []);
 
   // set up a fallback image in case no one submits one
   const addDefaultSrc = (ev) => {

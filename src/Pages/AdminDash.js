@@ -27,7 +27,9 @@ const AdminDash = () => {
           console.log(error);
           setAuth(false);
       });
-  }, [getSightings])
+      console.log('admin dash')
+      // eslint-disable-next-line
+  }, [])
     
 
   // populate the state with the input values on change

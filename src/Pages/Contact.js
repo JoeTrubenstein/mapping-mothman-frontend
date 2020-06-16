@@ -81,7 +81,7 @@ const Contact = () => {
                         }
                       }}
                       type="submit"
-                      class="btn btn-secondary btn-lg"
+                      className="btn btn-secondary btn-lg"
                     >
                       Submit
                     </button>

@@ -23,7 +23,9 @@ const SigntingDash = () => {
   useEffect(() => {
     getSightings();
     initializeReactGA();
-  }, [getSightings]);
+    console.log('sighting dash')
+    // eslint-disable-next-line
+  }, []);
 
   const closeModal = () => {
     setModal(false);
