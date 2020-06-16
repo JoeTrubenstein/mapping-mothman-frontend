@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import Geosuggest from 'react-geosuggest';
  
-const Location = () => {
+const Location = ({ setLocation }) => {
 
   const geosuggestEl = useRef(null);
 
@@ -14,7 +14,7 @@ const Location = () => {
   /**
    * When a suggest got selected
    */
-  const onSuggestSelect = (suggest) => console.log(suggest);
+  const onSuggestSelect = (suggest) => setLocation(suggest);
   const google = window.google
 
   return (
@@ -22,7 +22,7 @@ const Location = () => {
       <Geosuggest
         ref={geosuggestEl}
         placeholder="Start typing!"
-        initialValue="Hamburg"
+        initialValue=""
         fixtures={fixtures}
         onSuggestSelect={onSuggestSelect}
         location={new google.maps.LatLng(53.558572, 9.9278215)}

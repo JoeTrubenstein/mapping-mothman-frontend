@@ -1,52 +1,44 @@
-import React, { Component } from "react";
+import React, { useState, useContext } from "react";
 import Location from "./Location";
-// import cloudinary from 'cloudinary';
+import { Context } from '../Context/GlobalState';
 
-export default class Form extends Component {
-  state = {
-    uploadedImg: "",
-    formSubmit: false,
-    photoSubmit: false,
-    location: { lat: 40.7033127, lng: -73.979681 },
-  };
+ const Form = () => {
+  const [img, setImg] = useState({});
+  const [formSubmit, setFormSubmit] = useState(false);
+  const [photoSubmit, setPhotoSubmit] = useState(false);
+  const [location, setLocation] = useState({ lat: 40.7033127, lng: -73.979681 });
 
-  setLocation = (formLoc) => {
+  const { submitSighting } = useContext(Context);
+
+  const onSetLocation = (formLoc) => {
     if (!formLoc) {
       return;
     }
-    this.setState({
-      location: formLoc.location,
-    });
-    // console.log(this.state.location)
+    setLocation(formLoc.location);
   };
 
-  closeForm = (event) => {
+  const closeForm = (event) => {
     event.preventDefault();
   };
 
-  submitForm = (event) => {
+  const submitForm = (event) => {
     event.preventDefault();
-    console.log("the form was submitted.");
-    this.setState(
-      {
+    const sightingObj = {
         name: event.target.name.value,
         date: event.target.date.value,
         desc: event.target.desc.value,
-        formSubmit: true,
-      },
-      () => {
-        this.props.appSubmitSighting(this.state);
-      }
-    );
+        location: location,
+        uploadedImg: img.url
+    };
+    submitSighting(sightingObj);
+    setFormSubmit(true);
 
     setTimeout(() => {
-      this.setState({
-        formSubmit: false,
-      });
+      setFormSubmit(false);
     }, 5000);
   };
 
-  uploadWidget = (event) => {
+  const uploadWidget = (event) => {
     event.preventDefault();
 
     window.cloudinary.openUploadWidget(
@@ -60,8 +52,7 @@ export default class Form extends Component {
           console.log(error);
         } else {
           if (result.event === "success") {
-            console.log(result.info.secure_url);
-            let imgUrl = result.info.secure_url;
+            const imgUrl = result.info.secure_url;
 
             let imgName = "";
             for (let i = imgUrl.length - 1; i > 1; i--) {
@@ -73,20 +64,19 @@ export default class Form extends Component {
             }
 
             imgName = imgName.split("").reverse().join("");
-            console.log(imgName);
 
-            this.setState({
-              uploadedImg: imgUrl,
-              imgName: imgName,
-              photoSubmit: true,
-            });
+            const imgObj = {
+              url: imgUrl,
+              name: imgName,
+            };
+            setImg(imgObj);
+            setPhotoSubmit(true);
           }
         }
       }
     );
   };
 
-  render() {
     return (
       <React.Fragment>
         <div
@@ -125,7 +115,7 @@ export default class Form extends Component {
         >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              {this.state.formSubmit ? (
+              {formSubmit ? (
                 <span
                   style={{
                     color: "black",
@@ -143,8 +133,7 @@ export default class Form extends Component {
                 ""
               )}
               <form
-                onSubmit={this.submitForm}
-                ref={(element) => (this.form = element)}
+                onSubmit={submitForm}
               >
                 <div className="modal-body">
                   <div className="form-group">
@@ -157,7 +146,7 @@ export default class Form extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <Location setLocation={this.setLocation} />
+                    <Location setLocation={onSetLocation} />
                   </div>
                   <div className="form-group">
                     <input
@@ -189,9 +178,9 @@ export default class Form extends Component {
                   </div>
                   <div className="form-group">
                     <div className="custom-file">
-                      <button onClick={this.uploadWidget}>Upload photo</button>
+                      <button onClick={uploadWidget}>Upload photo</button>
                     </div>
-                    {this.state.photoSubmit ? (
+                    {photoSubmit ? (
                       <span
                         style={{
                           backgroundColor: "rgba(200, 200, 200, 0.5)",
@@ -199,7 +188,7 @@ export default class Form extends Component {
                           borderRadius: "4px",
                         }}
                       >
-                        {this.state.imgName}
+                        {img.name}
                       </span>
                     ) : null}
                   </div>
@@ -209,7 +198,7 @@ export default class Form extends Component {
                     type="button"
                     className="btn btn-secondary"
                     data-dismiss="modal"
-                    onClick={this.closeForm}
+                    onClick={closeForm}
                     ref={(el) => {
                       if (el) {
                         el.style.setProperty(
@@ -244,5 +233,6 @@ export default class Form extends Component {
         </div>
       </React.Fragment>
     );
-  }
 }
+
+export default Form;

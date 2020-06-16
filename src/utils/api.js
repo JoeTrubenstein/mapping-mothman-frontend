@@ -4,7 +4,7 @@ import setAuthJWT from "./setAuthJWT";
 
 export const handleSignUpAndLogInApiFB = userInfo => {
   return new Promise((resolve, reject) => {
-    let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*"
@@ -37,7 +37,7 @@ export const handleSignUpAndLogInApiFB = userInfo => {
 
 export const handleLogInApiEmail = userInfo => {
   return new Promise((resolve, reject) => {
-    let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*"
@@ -66,7 +66,7 @@ export const handleLogInApiEmail = userInfo => {
 
 export const handleSignUpApiEmail = userInfo => {
   return new Promise((resolve, reject) => {
-    let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*"
@@ -97,7 +97,7 @@ export const handleSignUpApiEmail = userInfo => {
 
 export const handleSigninApi = userInfo => {
   return new Promise((resolve, reject) => {
-    let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json;chars=UTF-8",
         "Access-Control-Allow-Origin": "*"
@@ -124,9 +124,9 @@ export const handleSigninApi = userInfo => {
 
 export const handleJWTExpirationApi = () => {
   return new Promise((resolve, reject) => {
-    let token = localStorage.getItem("jwtToken");
-    let currentTime = Date.now() / 1000;
-    let decoded = jwt_decode(token);
+    const token = localStorage.getItem("jwtToken");
+    const currentTime = Date.now() / 1000;
+    const decoded = jwt_decode(token);
 
     if (decoded.exp < currentTime) {
       localStorage.removeItem("jwtToken");
