@@ -27,7 +27,7 @@ const AdminDash = () => {
           console.log(error);
           setAuth(false);
       });
-  }, [])
+  }, [getSightings])
     
 
   // populate the state with the input values on change

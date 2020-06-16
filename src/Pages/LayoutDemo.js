@@ -20,7 +20,7 @@ const LayoutDemo = () => {
   useEffect(() => {
     getSightings();
     initializeReactGA();
-  }, []);
+  }, [getSightings]);
 
   // set up a fallback image in case no one submits one
   const addDefaultSrc = (ev) => {

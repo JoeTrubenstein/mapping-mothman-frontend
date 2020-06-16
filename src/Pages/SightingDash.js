@@ -23,7 +23,7 @@ const SigntingDash = () => {
   useEffect(() => {
     getSightings();
     initializeReactGA();
-  }, []);
+  }, [getSightings]);
 
   const closeModal = () => {
     setModal(false);
